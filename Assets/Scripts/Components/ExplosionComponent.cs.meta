@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b157f423c0ddc5b47b32a31a166e2bc3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mExplosionParticleSystem: {fileID: 1554876137478246, guid: 3836969655f4a8f4290ce980aae54748,
+      type: 2}
+  - mExplosionAudioClip: {fileID: 8300000, guid: 72e76810224064300b7d32e8322a5d12,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

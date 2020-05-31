@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 117457330f9b112459c15cac47a7a612
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mFighterObject: {fileID: 1659307254746534, guid: c8f1f50bcaeb8214f92b21f43a863074,
+      type: 2}
+  - mShipObject: {fileID: 1819507207574538, guid: ef530cf1f4ef6d4408f86802c4c35a79,
+      type: 2}
+  - mDroneObject: {fileID: 1726296048970732, guid: 442d1e8018f51a74c8e69f1ecaa97c10,
+      type: 2}
+  - mMineObject: {fileID: 1848800402399958, guid: 5f8c8775051050f4685c6a9c57f68cac,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
