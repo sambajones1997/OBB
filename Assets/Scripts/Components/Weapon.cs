@@ -52,15 +52,12 @@ public class Weapon : MonoBehaviour
             {
                 case EWeaponType.Blaster:
                     FireBlaster();
-                    mFireRate = 10;
                     break;
                 case EWeaponType.Shotgun:
                     FireShotgun();
-                    mFireRate = 5;
                     break;
                 case EWeaponType.Rockets:
                     FireRockets();
-                    mFireRate = 1;
                     break;
             }
             mFireRateTimer = 1.0f / mFireRate;

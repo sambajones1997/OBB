@@ -9,13 +9,16 @@ public class ShipController : MonoBehaviour
     public GameManager.EEnemyType mEnemyType;
     public float mShipRotationSpeed = 90.0f;
     public float mShipShootAngle = 15.0f;
-    protected float m_aiUpdateTimer = 0.3f; // avg human reaction is 0.25 - 0.35 seconds (0.3 on avg)
-    public float m_maxUpdateTimer = 0.3f;
     public PlayerController mPlayerShip;
     public GameObject mLastCauseOfDamage;
     protected Health m_healthComponent;
     bool bIsAlive = true;
     protected Weapon m_weapon;
+
+    protected float m_playerReaction = 0.2f;
+    [SerializeField] protected float m_maxPlayerReaction = 0.2f; // time it takes to spot player and shoot at them
+    [SerializeField] protected float m_maxShipTurnTimer = 0.05f;
+    protected float m_shipTurnTimer = 0.05f;
 
     private void Start()
     {
@@ -27,33 +30,22 @@ public class ShipController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        m_aiUpdateTimer -= Time.fixedDeltaTime;
-        if (bIsAlive && m_aiUpdateTimer <= 0.0f)
+        if (bIsAlive)
         {
             if (mPlayerShip)
             {
+                m_shipTurnTimer -= Time.fixedDeltaTime;
+                if (m_shipTurnTimer <= 0.05f)
+                {
+                    RotateShip();
+                    m_shipTurnTimer = m_maxShipTurnTimer;
+                }
                 CheckAngleOfPlayer();
             }
 
             if (m_healthComponent.GetHealth() <= 0) DestroyShip();
-            m_aiUpdateTimer = m_maxUpdateTimer;
-        }
-        ProcessState();
-    }
-
-    private void ProcessState()
-    {
-        switch (m_currentAIState)
-        {
-            case EAIState.Turning:
-                RotateShip();
-                break;
-            case EAIState.Shooting:
-                FireWeapon();
-                break;
         }
     }
-
     public void RotateShip()
     {
         Vector3 relativePos = mPlayerShip.gameObject.transform.position - transform.position;
@@ -70,15 +62,12 @@ public class ShipController : MonoBehaviour
         float angle = Vector3.Angle(relativePos, transform.forward);
         if (angle <= mShipShootAngle && angle >= -mShipShootAngle)
         {
-            m_currentAIState = EAIState.Shooting;
+            m_playerReaction -= Time.fixedDeltaTime;
+            if (m_playerReaction <= 0.0f)
+                m_weapon.Fire();
         }
         else
-            m_currentAIState = EAIState.Turning;
-    }
-
-    void FireWeapon()
-    {
-        m_weapon.Fire();
+            m_playerReaction = m_maxPlayerReaction;
     }
 
     public void DestroyShip(bool addScore = true, bool GiveWeaponToPlayer = true)

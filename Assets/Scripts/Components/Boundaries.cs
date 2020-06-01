@@ -24,7 +24,7 @@ public class Boundaries : MonoBehaviour {
         {
             mRigidBody.position = new Vector3(-mRightBoundary, mRigidBody.position.y, mRigidBody.position.z);
         }
-        else if (mRigidBody.position.z >= mTopBoundary)
+        if (mRigidBody.position.z >= mTopBoundary)
         {
             mRigidBody.position = new Vector3(mRigidBody.position.x, mRigidBody.position.y, -mTopBoundary);
         }

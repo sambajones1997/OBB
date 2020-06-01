@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     Health mHealth;
     Rigidbody mRigidBody;
     float mKeyPressDuration = 0.1f;
+    float mTurnRate = 90.0f;
     int mScore = 0;
 
     protected Weapon m_weapon;
@@ -75,13 +76,18 @@ public class PlayerController : MonoBehaviour
             case EKeyPressType.Hold:
                 if (mKeyPressDuration <= 0.0f)
                 {
-                    mRigidBody.transform.Rotate(Vector3.up * Time.deltaTime * 90.0f);
+                    mRigidBody.transform.Rotate(Vector3.up * Time.deltaTime * -mTurnRate);
                 }
                 break;
             case EKeyPressType.Tap:
                 m_weapon.Fire();
                 mKeyPressType = EKeyPressType.None;
                 break;
+        }
+
+        if (Input.GetButton("Fire2"))
+        {
+            mRigidBody.transform.Rotate(Vector3.up * Time.deltaTime * mTurnRate);
         }
 
         if (!bIsHeld && mKeyPressType != EKeyPressType.None && mKeyPressDuration <= 0.0f)
@@ -117,7 +123,18 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeWeaponType(Weapon.EWeaponType newWeaponType)
     {
-        m_weapon.ChangeWeaponType(newWeaponType);     
+        m_weapon.ChangeWeaponType(newWeaponType);
+        switch (m_weapon.mWeaponType)
+        {
+            case Weapon.EWeaponType.Blaster:
+                m_weapon.mFireRate = 10;
+                break;
+            case Weapon.EWeaponType.Shotgun:
+                m_weapon.mFireRate = 5;
+                break;
+            case Weapon.EWeaponType.Rockets:
+                m_weapon.mFireRate = 1;
+                break;
+        }
     }
-
 }
