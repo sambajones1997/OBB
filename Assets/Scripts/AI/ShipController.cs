@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    protected enum EAIState {Idle, Shooting, Turning}; // shooting also involves turning
-    protected EAIState m_currentAIState; 
     public GameManager.EEnemyType mEnemyType;
     public float mShipRotationSpeed = 90.0f;
     public float mShipShootAngle = 15.0f;
