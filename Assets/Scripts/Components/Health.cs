@@ -13,12 +13,12 @@ public class Health : MonoBehaviour
         mHealth = mMaxHealth;
     }
 
-    public void Damage(int damage, GameObject ownerOfDamage = null)
+    public void TakeDamage(DamagePackage damagePackage)
     {
-        if ((mHealth -= damage) <= 0)
+        if ((mHealth -= damagePackage.mDamage) <= 0)
         {
             mHealth = 0;
-            if (GetComponentInParent<ShipController>()) GetComponentInParent<ShipController>().mLastCauseOfDamage = ownerOfDamage;
+            if (GetComponentInParent<ShipController>()) GetComponentInParent<ShipController>().mLastCauseOfDamage = damagePackage.mDamageDealer;
         }
     }
 
@@ -27,6 +27,4 @@ public class Health : MonoBehaviour
         mHealth += health;
         if (mHealth > mMaxHealth) mHealth = mMaxHealth;
     }
-
-
 }

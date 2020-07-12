@@ -2,32 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipController : MonoBehaviour
+public class AIShipController : ShipController
 {
     public GameManager.EEnemyType mEnemyType;
-    public float mShipRotationSpeed = 90.0f;
     public float mShipShootAngle = 15.0f;
     public PlayerController mPlayerShip;
-    public GameObject mLastCauseOfDamage;
-    protected Health m_healthComponent;
-    bool bIsAlive = true;
-    protected Weapon m_weapon;
-
     protected float m_playerReaction = 0.2f;
     [SerializeField] protected float m_maxPlayerReaction = 0.2f; // time it takes to spot player and shoot at them
     [SerializeField] protected float m_maxShipTurnTimer = 0.05f;
     protected float m_shipTurnTimer = 0.05f;
 
-    private void Start()
+    // Start is called before the first frame update
+    protected override void OnShipStart()
     {
-       if (FindObjectOfType<PlayerController>()) mPlayerShip = FindObjectOfType<PlayerController>();
-        m_weapon = GetComponentInChildren<Weapon>();
-        if (!m_weapon) DestroyShip(false);
-        m_healthComponent = GetComponent<Health>();
+        base.OnShipStart(); 
+        if (FindObjectOfType<PlayerController>()) mPlayerShip = FindObjectOfType<PlayerController>();
     }
 
-    private void FixedUpdate()
+    protected override void OnShipFixedUpdate()
     {
+        base.OnShipFixedUpdate();
         if (bIsAlive)
         {
             if (mPlayerShip)
@@ -40,11 +34,10 @@ public class ShipController : MonoBehaviour
                 }
                 CheckAngleOfPlayer();
             }
-
-            if (m_healthComponent.GetHealth() <= 0) DestroyShip();
         }
     }
-    public void RotateShip()
+
+    protected override void RotateShip()
     {
         Vector3 relativePos = mPlayerShip.gameObject.transform.position - transform.position;
 
@@ -54,7 +47,7 @@ public class ShipController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDir);
     }
 
-    void CheckAngleOfPlayer()
+    protected void CheckAngleOfPlayer()
     {
         Vector3 relativePos = mPlayerShip.gameObject.transform.position - transform.position;
         float angle = Vector3.Angle(relativePos, transform.forward);
@@ -62,19 +55,16 @@ public class ShipController : MonoBehaviour
         {
             m_playerReaction -= Time.fixedDeltaTime;
             if (m_playerReaction <= 0.0f)
-                m_weapon.Fire();
+                mWeaponController.FireWeapon();
         }
         else
             m_playerReaction = m_maxPlayerReaction;
     }
 
-    public void DestroyShip(bool addScore = true, bool GiveWeaponToPlayer = true)
+    protected override void OnShipDie()
     {
-        if (addScore) GetComponent<GiveScore>().AddPlayerScore();
-        if (mLastCauseOfDamage && mLastCauseOfDamage.tag == "Player" && GiveWeaponToPlayer && m_weapon.mWeaponType != Weapon.EWeaponType.Blaster)
-        {
-            mPlayerShip.GetComponent<Weapon>().ChangeWeaponType(m_weapon.mWeaponType);
-        }
+        base.OnShipDie();
+        GetComponent<GiveScore>().AddPlayerScore();
         foreach (var v in GetComponentsInChildren<Renderer>())
         {
             Destroy(v);
@@ -86,5 +76,4 @@ public class ShipController : MonoBehaviour
         if (GetComponent<SpawnLoot>() && Random.Range(0, 10) >= 9) GetComponent<SpawnLoot>().DropLoot();
         Destroy(gameObject, 1.0f);
     }
-
 }

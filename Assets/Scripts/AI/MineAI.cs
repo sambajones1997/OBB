@@ -69,11 +69,9 @@ public class MineAI : MonoBehaviour
     {
         if (bIsAlive)
         {
-            if (other.gameObject.GetComponent<Health>())
-            {
-                other.gameObject.GetComponent<Health>().Damage(mDamage);
-                DestroyMine();
-            }
+            DamagePackage damagePackage = new DamagePackage(mDamage, gameObject);
+            gameObject.SendMessage("TakeDamage", damagePackage);
+            DestroyMine();
         }
     }
 }

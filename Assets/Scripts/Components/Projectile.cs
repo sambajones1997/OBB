@@ -23,22 +23,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.GetComponentInParent<Projectile>())
-        {
-            Projectile proj = collider.gameObject.GetComponentInParent<Projectile>();
-            if (proj.bIsRocket)
-            {
-                if (proj.mParentObject == mParentObject) return;
-            }
-            else
-            {
-                if (proj.mParentObject == mParentObject) return;
-            }
-
-        }
         if (collider.gameObject != mParentObject)
         {
-            if (collider.gameObject.GetComponent<Health>()) collider.gameObject.GetComponent<Health>().Damage(mProjectileDamage, mParentObject);
+            DamagePackage damagePackage  = new DamagePackage(mProjectileDamage, mParentObject);
+            collider.gameObject.SendMessage("TakeDamage", damagePackage);
             Destroy(gameObject);
         }
     }

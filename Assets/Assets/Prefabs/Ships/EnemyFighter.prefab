@@ -4083,9 +4083,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4850945861185086}
-  - component: {fileID: 114171700709145236}
   - component: {fileID: 114185671492031388}
-  - component: {fileID: 114644620528603386}
   - component: {fileID: 114521796319265092}
   - component: {fileID: 54199077060469950}
   - component: {fileID: 65671770780076892}
@@ -4094,6 +4092,8 @@ GameObject:
   - component: {fileID: 114162581639671256}
   - component: {fileID: 82979301745266230}
   - component: {fileID: 114816645638075346}
+  - component: {fileID: 2672558076828810771}
+  - component: {fileID: 651665520265227919}
   m_Layer: 0
   m_Name: EnemyFighter
   m_TagString: Enemy
@@ -4186,28 +4186,10 @@ Transform:
   - {fileID: 4714502645124078}
   - {fileID: 4239468389842150}
   - {fileID: 4881517550042404}
+  - {fileID: 8595053108864431184}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114171700709145236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659307254746534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37c7c5f1068f13d4aaf673f2bfe38673, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mEnemyType: 1
-  mShipRotationSpeed: 90
-  mShipShootAngle: 15
-  mPlayerShip: {fileID: 0}
-  mLastCauseOfDamage: {fileID: 0}
-  m_maxPlayerReaction: 0.2
-  m_maxShipTurnTimer: 0.05
 --- !u!114 &114185671492031388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4222,35 +4204,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mMomentumVector: {x: 0, y: 0, z: 0}
   mShipSpeed: 40
---- !u!114 &114644620528603386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659307254746534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fad8d4851f9844446998f1c704b2da6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mWeaponType: 0
-  mEnergySound: {fileID: 8300000, guid: 1be4472894949437694aead55c6da60f, type: 3}
-  mRocketSound: {fileID: 8300000, guid: b204507b340e4484680326f70f954718, type: 3}
-  mFireRateTimer: 3
-  mWeaponSlots:
-  - {fileID: 1092268932131722}
-  - {fileID: 1376798264519324}
-  mEnergyObject: {fileID: 1584495645493048, guid: cc907c590d1d53b44b3f42a785dcfba5,
-    type: 3}
-  mRockets: {fileID: 1734542271300510, guid: 7c84ce0e1f2bc0b4a8856f0467cfb7bd, type: 3}
-  mFireRate: 2
-  mWeaponAmmo: 8
-  mMaxWeaponAmmo: 8
-  bUsesAmmo: 1
-  mReloadTime: 2
-  bWeaponCanChange: 0
-  mWeaponDamage: 10
 --- !u!114 &114521796319265092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4447,6 +4400,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mLootObjects:
   - {fileID: 1040850700546488, guid: b46241ddcaa67f64b888efe4744587ec, type: 3}
+--- !u!114 &2672558076828810771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659307254746534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55aa8f5a1201bd0499b51bd599f98344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mLastCauseOfDamage: {fileID: 0}
+  mEnemyType: 0
+  mShipShootAngle: 15
+  mPlayerShip: {fileID: 0}
+  m_maxPlayerReaction: 0.2
+  m_maxShipTurnTimer: 0.05
+--- !u!114 &651665520265227919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659307254746534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252ddf102e6fe3747aefcee8d1d1969e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mEquippedWeapon: {fileID: 6191131182402188697}
+  mShipController: {fileID: 2672558076828810771}
+  mProjectileLocations:
+  - {fileID: 1092268932131722}
+  - {fileID: 1376798264519324}
 --- !u!1 &1665832954431342
 GameObject:
   m_ObjectHideFlags: 0
@@ -6157,3 +6145,105 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mThrustParticle: {fileID: 1602853551529342, guid: dd84cfbf113ad454c8fd26ba3a645f3c,
     type: 3}
+--- !u!1001 &3629555789611188229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4850945861185086}
+    m_Modifications:
+    - target: {fileID: 3074683795875417221, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_Name
+      value: BlasterWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 74
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473042711341299100, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: mAudioSource
+      value: 
+      objectReference: {fileID: 82979301745266230}
+    - target: {fileID: 7473042711341299100, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: mWeaponController
+      value: 
+      objectReference: {fileID: 651665520265227919}
+    - target: {fileID: 7473042711341299100, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: mUseAmmo
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 53a7984f6aad9e042b8157a9f604b6c8, type: 3}
+--- !u!4 &8595053108864431184 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4979018015217022037, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3629555789611188229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6191131182402188697 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7473042711341299100, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3629555789611188229}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad8d4851f9844446998f1c704b2da6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
