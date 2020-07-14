@@ -25,9 +25,20 @@ public class Projectile : MonoBehaviour
     {
         if (collider.gameObject != mParentObject)
         {
-            DamagePackage damagePackage  = new DamagePackage(mProjectileDamage, mParentObject);
-            collider.gameObject.SendMessage("TakeDamage", damagePackage);
+            if (collider.gameObject.layer == 10)
+            {
+                Projectile proj = GetComponentInChildren<Projectile>(collider.gameObject.transform.root);
+                if (proj && proj.mParentObject == mParentObject)
+                    return;
+            }
+            DamagePackage damagePackage = new DamagePackage(mProjectileDamage, mParentObject);
+            collider.transform.root.SendMessage("TakeDamage", damagePackage);
             Destroy(gameObject);
         }
+    }
+
+    public void TakeDamage(DamagePackage damagePackage)
+    {
+        Destroy(gameObject);
     }
 }

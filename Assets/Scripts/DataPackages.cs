@@ -14,7 +14,3 @@ public class DamagePackage
     }
 }
 
-public class PickupItem
-{
-   
-}

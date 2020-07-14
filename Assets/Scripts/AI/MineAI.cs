@@ -26,7 +26,6 @@ public class MineAI : MonoBehaviour
         if (bIsAlive)
         {
             if (mHomingTarget) FaceHomingTarget();
-            if (GetComponent<Health>().mHealth <= 0) DestroyMine();
             if ((mHomingTimer -= Time.fixedDeltaTime) <= 0.0f)
             {
                 CheckForNearbyShips();
@@ -52,7 +51,7 @@ public class MineAI : MonoBehaviour
         transform.LookAt(mHomingTarget.transform);
     }
 
-    public void DestroyMine()
+    public void OnShipDie()
     {
         GetComponent<GiveScore>().AddPlayerScore();
         if (GetComponent<ExplosionComponent>()) GetComponent<ExplosionComponent>().Explode();
@@ -71,7 +70,7 @@ public class MineAI : MonoBehaviour
         {
             DamagePackage damagePackage = new DamagePackage(mDamage, gameObject);
             gameObject.SendMessage("TakeDamage", damagePackage);
-            DestroyMine();
+            OnShipDie();
         }
     }
 }

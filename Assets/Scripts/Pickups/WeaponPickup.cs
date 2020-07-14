@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponPickup : MonoBehaviour
+public class WeaponPickup : Pickup
 {
     [SerializeField] protected GameObject mWeapon;
 
-    protected virtual void OnItemPickUp(PlayerController player)
+    protected override void OnItemPickUp(PlayerController player)
     {
-        
+        player.transform.root.SendMessage("PickUpNewWeapon", mWeapon);
+        Destroy(gameObject);
     }
 }

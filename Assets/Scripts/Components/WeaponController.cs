@@ -11,7 +11,8 @@ public class WeaponController : MonoBehaviour
     [SerializeField] protected List<GameObject> mProjectileLocations;
     public void FireWeapon()
     {
-        mEquippedWeapon.Fire(mProjectileLocations);
+        if (mEquippedWeapon && mProjectileLocations.Count > 0)
+            mEquippedWeapon.Fire(mProjectileLocations);
     }
 
     public void Update()
@@ -27,6 +28,7 @@ public class WeaponController : MonoBehaviour
     protected void Start()
     {
         mEquippedWeapon = GetComponentInChildren<Weapon>();
+        mEquippedWeapon.SetupWeapon();
         OnWeaponControllerStart();
     }
     protected virtual void OnWeaponControllerStart()

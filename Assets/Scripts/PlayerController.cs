@@ -28,8 +28,7 @@ public class PlayerController : ShipController
 
     private void FixedUpdate()
     {
-        if (mHealthComponent.GetHealth() <= 0 && bIsAlive) DestroyPlayer();
-        else mGameUI.UpdateHealth(mHealthComponent.mHealth, mHealthComponent.mMaxHealth);
+        if (bIsAlive) mGameUI.UpdateHealth(mHealthComponent.mHealth, mHealthComponent.mMaxHealth);
     }
 
     void GameInput()
@@ -53,7 +52,7 @@ public class PlayerController : ShipController
         mGameUI.UpdateScore(mScore);
     }
 
-    void DestroyPlayer()
+    public void OnShipDie()
     {
         mLeaderboard.gameObject.SetActive(true);
         mGameUI.gameObject.SetActive(false);

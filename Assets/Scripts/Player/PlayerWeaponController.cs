@@ -7,12 +7,31 @@ public class PlayerWeaponController : WeaponController
     [SerializeField] protected Weapon mDefaultWeapon;
 
     float mWeaponTimeRemaining = 0.0f;
-    float mMaxWeaponTime = 30.0f;
+    float mMaxWeaponTime = 10.0f;
     bool mUsingDefaultWeapon = true;
+
+    public void PickUpNewWeapon(GameObject newWeapon)
+    {
+        newWeapon.transform.parent = transform.root;
+        if (!mUsingDefaultWeapon)
+        {
+            UnequipAndDestroyWeapon();
+        }
+        SwapWeapon(newWeapon.GetComponent<Weapon>(), false);
+    }
+
+    protected void UnequipAndDestroyWeapon()
+    {
+        mEquippedWeapon = null;
+        Destroy(mEquippedWeapon.gameObject);
+        SwapWeapon(mDefaultWeapon, true);
+    }
 
     public void SwapWeapon(Weapon newWeapon, bool usingDefaultWeapon = false)
     {
         mEquippedWeapon = newWeapon;
+        if (!usingDefaultWeapon)
+            mEquippedWeapon.SetupWeapon();
         mWeaponTimeRemaining = mMaxWeaponTime;
         mUsingDefaultWeapon = usingDefaultWeapon;
     }
@@ -42,6 +61,13 @@ public class PlayerWeaponController : WeaponController
 
     protected override void OnWeaponControllerStart()
     {
-        mEquippedWeapon = mDefaultWeapon;
+        if (!mEquippedWeapon && mDefaultWeapon)
+            mEquippedWeapon = mDefaultWeapon;
+        else if (mEquippedWeapon && !mDefaultWeapon)
+            mDefaultWeapon = mEquippedWeapon;
+        else
+        {
+            mEquippedWeapon = GetComponentInChildren<Weapon>();
+        }
     }
 }

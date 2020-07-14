@@ -20,11 +20,15 @@ public class Weapon : MonoBehaviour
     protected void Start()
     {
         mAmmo = mMaxAmmo;
+    }
+
+    public void SetupWeapon()
+    {
         if (!mWeaponController)
-            mWeaponController = GetComponentInParent<WeaponController>();
+            mWeaponController = transform.root.GetComponentInChildren<WeaponController>();
 
         if (!mAudioSource)
-            mAudioSource = GetComponentInParent<AudioSource>();
+            mAudioSource = transform.root.GetComponentInChildren<AudioSource>();
 
         if (!mWeaponController || !mAudioSource || !mWeaponSound || !mWeaponProjectile)
             Destroy(this);
