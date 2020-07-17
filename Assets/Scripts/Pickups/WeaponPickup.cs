@@ -8,7 +8,6 @@ public class WeaponPickup : Pickup
 
     protected override void OnItemPickUp(PlayerController player)
     {
-        player.transform.root.SendMessage("PickUpNewWeapon", mWeapon);
-        Destroy(gameObject);
+        player.gameObject.SendMessage("PickUpNewWeapon", mWeapon, SendMessageOptions.RequireReceiver);
     }
 }

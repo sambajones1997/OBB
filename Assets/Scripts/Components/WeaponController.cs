@@ -17,6 +17,8 @@ public class WeaponController : MonoBehaviour
 
     public void Update()
     {
+        if (!mEquippedWeapon)
+            return;
         OnWeaponControllerUpdate();
     }
 
@@ -28,7 +30,10 @@ public class WeaponController : MonoBehaviour
     protected void Start()
     {
         mEquippedWeapon = GetComponentInChildren<Weapon>();
-        mEquippedWeapon.SetupWeapon();
+        if (mEquippedWeapon)
+        {
+            mEquippedWeapon.SetupWeapon();
+        }
         OnWeaponControllerStart();
     }
     protected virtual void OnWeaponControllerStart()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerWeaponController))]
 public class PlayerController : ShipController
 {
     public GameUI mGameUI;
@@ -10,9 +11,18 @@ public class PlayerController : ShipController
     Rigidbody mRigidBody;
     int mScore = 0;
 
+    int mCurrentKills = 0;
+    int mCurrentKillStreak = 0;
+    float mKillStreakTimer = 0.0f;
+
     protected override void OnShipStart()
     {
-        Random.InitState(System.DateTime.Now.Second);
+        if (!mGameUI)
+            mGameUI = FindObjectOfType<GameUI>();
+
+        if (!mLeaderboard)
+            mLeaderboard = FindObjectOfType<Leaderboard>();
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         mGameUI.UpdateHealth(mHealthComponent.mHealth, mHealthComponent.mMaxHealth);
@@ -52,19 +62,11 @@ public class PlayerController : ShipController
         mGameUI.UpdateScore(mScore);
     }
 
-    public void OnShipDie()
+    protected override void OnShipDie()
     {
         mLeaderboard.gameObject.SetActive(true);
         mGameUI.gameObject.SetActive(false);
         mLeaderboard.UpdateList(mScore);
-        GetComponent<ExplosionComponent>().Explode();
-        foreach (var v in GetComponentsInChildren<Renderer>())
-        {
-            Destroy(v);
-        }
         FindObjectOfType<GameManager>().bIsPlayerAlive = false;
-        bIsAlive = false;
-        Destroy(gameObject, 1.0f);
-        Destroy(this);
     }
 }

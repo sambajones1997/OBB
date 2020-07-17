@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
                     return;
             }
             DamagePackage damagePackage = new DamagePackage(mProjectileDamage, mParentObject);
-            collider.transform.root.SendMessage("TakeDamage", damagePackage);
+            collider.transform.gameObject.SendMessage("TakeDamage", damagePackage,SendMessageOptions.DontRequireReceiver);
             Destroy(gameObject);
         }
     }

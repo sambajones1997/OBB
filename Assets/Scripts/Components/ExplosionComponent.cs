@@ -7,11 +7,11 @@ public class ExplosionComponent : MonoBehaviour
     public GameObject mExplosionParticleSystem;
     public AudioClip mExplosionAudioClip;
 
-	public void Explode()
+	protected void Explode()
     {
         Instantiate(mExplosionParticleSystem, transform.position, new Quaternion());
         GetComponentInParent<AudioSource>().clip = mExplosionAudioClip;
         GetComponentInParent<AudioSource>().Play();
-        Destroy(this);
+        enabled = false;
     }
 }

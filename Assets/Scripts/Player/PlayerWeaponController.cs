@@ -66,8 +66,6 @@ public class PlayerWeaponController : WeaponController
         else if (mEquippedWeapon && !mDefaultWeapon)
             mDefaultWeapon = mEquippedWeapon;
         else
-        {
             mEquippedWeapon = GetComponentInChildren<Weapon>();
-        }
     }
 }

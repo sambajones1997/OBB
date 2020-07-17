@@ -6,6 +6,7 @@ public class Pickup : MonoBehaviour
 {
     [SerializeField] protected float mRotationSpeedY = 45.0f;
     [SerializeField] protected float mRotationSpeedZ = 45.0f;
+    [SerializeField] protected bool m_destroyOnPickup = true;
 
     protected void Start()
     {
@@ -27,6 +28,8 @@ public class Pickup : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {        
             OnItemPickUp(other.gameObject.GetComponent<PlayerController>());
+            if (m_destroyOnPickup)
+                Destroy(gameObject);
         }
     }
 

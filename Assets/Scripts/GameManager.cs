@@ -39,11 +39,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Random.InitState((int)System.DateTime.Now.Ticks);
         mTimeBetweenFighters = Random.Range(0.0f, 5.0f);
         mTimeBetweenShips = Random.Range(0.0f, 5.0f);
         mTimeBetweenDrones = Random.Range(0.0f, 5.0f);
         mTimeBetweenMines = Random.Range(0.0f, 5.0f);
-        Instantiate(mPlanets[Random.Range(0, mPlanets.Count - 1)], new Vector3(0.0f, -30.0f, 0.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
+        Instantiate(mPlanets[Random.Range(0, mPlanets.Count - 1)], new Vector3(0.0f, -2.0f, 0.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
     }
 
     private void FixedUpdate()

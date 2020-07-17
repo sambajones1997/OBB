@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineAI : MonoBehaviour
+public class MineAIController : ShipController
 {
     float mHomingTimer = 1.0f;
 
     GameObject mHomingTarget;
-    bool bIsAlive = true;
 
     public float m_maxDist = 40.0f;
     protected float mMaxDistSquared = 10.0f;
@@ -15,14 +14,15 @@ public class MineAI : MonoBehaviour
 
     public int mDamage = 50;
 
-    private void Start()
+    protected override void OnShipStart()
     {
         mMaxDistSquared = m_maxDist * m_maxDist;
         transform.Rotate(new Vector3(0.0f, Random.Range(10.0f, 350.0f), 0.0f));
     }
 
-    private void FixedUpdate()
+    protected override void OnShipFixedUpdate()
     {
+        base.OnShipFixedUpdate();
         if (bIsAlive)
         {
             if (mHomingTarget) FaceHomingTarget();
@@ -51,17 +51,10 @@ public class MineAI : MonoBehaviour
         transform.LookAt(mHomingTarget.transform);
     }
 
-    public void OnShipDie()
+    protected override void OnShipDie()
     {
         GetComponent<GiveScore>().AddPlayerScore();
-        if (GetComponent<ExplosionComponent>()) GetComponent<ExplosionComponent>().Explode();
-        foreach (var v in GetComponentsInChildren<Renderer>())
-        {
-            Destroy(v);
-        }
-        bIsAlive = false;
         FindObjectOfType<GameManager>().DestroyedShip(GameManager.EEnemyType.Mine);
-        Destroy(gameObject, 1.0f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,8 +62,8 @@ public class MineAI : MonoBehaviour
         if (bIsAlive)
         {
             DamagePackage damagePackage = new DamagePackage(mDamage, gameObject);
-            gameObject.SendMessage("TakeDamage", damagePackage);
-            OnShipDie();
+            gameObject.SendMessage("TakeDamage", damagePackage, SendMessageOptions.DontRequireReceiver);
+            Die();
         }
     }
 }

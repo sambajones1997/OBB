@@ -22,17 +22,17 @@ public class GameUI : MonoBehaviour
 
     private void Update()
     {
-        if (mFPSList.Count >= 1000)
-        {
-            mFPSList[mFPSIndexes] = ((int)(1.0f / Time.deltaTime));
-            mFPSIndexes++;
-            if (mFPSIndexes >= 1000) mFPSIndexes = 0;
-        }
-        else
-        {
-            mFPSList.Add(((int)(1.0f / Time.deltaTime)));
-        }
-        mFPSText.text = mFPSList[mFPSList.Count - 1].ToString();
+       if (mFPSList.Count >= 1000)
+       {
+           mFPSList[mFPSIndexes] = ((int)(1.0f / Time.deltaTime));
+           mFPSIndexes++;
+           if (mFPSIndexes >= 1000) mFPSIndexes = 0;
+       }
+       else
+       {
+           mFPSList.Add(((int)(1.0f / Time.deltaTime)));
+       }
+       mFPSText.text = mFPSList[mFPSList.Count - 1].ToString();
     }
 
     private void FixedUpdate()

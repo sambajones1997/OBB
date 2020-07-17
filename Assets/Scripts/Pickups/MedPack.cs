@@ -16,6 +16,6 @@ public class MedPack : Pickup
 
     protected override void OnItemPickUp(PlayerController player) 
     {
-        player.SendMessage("AddHealth", mHealthRegeneration);
+        player.gameObject.SendMessage("AddHealth", mHealthRegeneration, SendMessageOptions.DontRequireReceiver);
     }
 }

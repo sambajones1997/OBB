@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(WeaponController))]
 public class AIShipController : ShipController
 {
     public GameManager.EEnemyType mEnemyType;
@@ -65,15 +66,7 @@ public class AIShipController : ShipController
     {
         base.OnShipDie();
         GetComponent<GiveScore>().AddPlayerScore();
-        foreach (var v in GetComponentsInChildren<Renderer>())
-        {
-            Destroy(v);
-        }
-        GetComponent<ExplosionComponent>().Explode();
-        GetComponent<BoxCollider>().enabled = false;
-        bIsAlive = false;
         FindObjectOfType<GameManager>().DestroyedShip(mEnemyType);
         if (GetComponent<SpawnLoot>() && Random.Range(0, 10) >= 9) GetComponent<SpawnLoot>().DropLoot();
-        Destroy(gameObject, 1.0f);
     }
 }
