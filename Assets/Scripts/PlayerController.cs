@@ -6,22 +6,23 @@ using UnityEngine;
 public class PlayerController : ShipController
 {
     public GameUI mGameUI;
-    public Leaderboard mLeaderboard;
-
+    public GameManager mGameManager;
+    [SerializeField] protected float mKillStreakTimeOut = 5.0f;
     Rigidbody mRigidBody;
     int mScore = 0;
 
     int mCurrentKills = 0;
     int mCurrentKillStreak = 0;
     float mKillStreakTimer = 0.0f;
+    float mTimeSinceLastKill = 0.0f;
 
     protected override void OnShipStart()
     {
         if (!mGameUI)
             mGameUI = FindObjectOfType<GameUI>();
 
-        if (!mLeaderboard)
-            mLeaderboard = FindObjectOfType<Leaderboard>();
+        if (!mGameManager)
+            mGameManager = FindObjectOfType<GameManager>();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -33,12 +34,20 @@ public class PlayerController : ShipController
     protected override void OnShipUpdate ()
     {
         mWeaponController.FireWeapon();
+        mTimeSinceLastKill += Time.deltaTime;
+        if (mTimeSinceLastKill >= mKillStreakTimeOut)
+        {
+            mTimeSinceLastKill = 0.0f;
+            mKillStreakTimer = 0.0f;
+            mCurrentKillStreak = 0;
+        }
         GameInput();
     }
 
     private void FixedUpdate()
     {
-        if (bIsAlive) mGameUI.UpdateHealth(mHealthComponent.mHealth, mHealthComponent.mMaxHealth);
+        if (bIsAlive) 
+            mGameUI.UpdateHealth(mHealthComponent.mHealth, mHealthComponent.mMaxHealth);
     }
 
     void GameInput()
@@ -54,19 +63,37 @@ public class PlayerController : ShipController
         }
     }
 
-    public void AddScore(int score)
+    public void AddScore(ScorePackage scorePackage)
     {
         int currentThousand = mScore / 1000;
-        mScore += score;
+        mScore += scorePackage.mScore;
         if (currentThousand < (mScore / 1000)) mHealthComponent.AddHealth(25);
         mGameUI.UpdateScore(mScore);
+
+        if (scorePackage.mPlayerKill)
+        {
+            ++mCurrentKills;
+            ++mCurrentKillStreak;
+            KillStreakCalculator();
+        }
     }
 
     protected override void OnShipDie()
     {
-        mLeaderboard.gameObject.SetActive(true);
+        mGameManager.SendMessage("PlayerHasDied", mScore);
         mGameUI.gameObject.SetActive(false);
-        mLeaderboard.UpdateList(mScore);
         FindObjectOfType<GameManager>().bIsPlayerAlive = false;
+    }
+
+    protected void KillStreakCalculator()
+    {
+        if (mCurrentKillStreak > 0)
+        {
+            mKillStreakTimer += mTimeSinceLastKill;
+            if (mCurrentKillStreak >= 10 && mCurrentKillStreak <= 20)
+            {
+                // boom double fire rate
+            }
+        } // else we start the timer at 0.0f
     }
 }

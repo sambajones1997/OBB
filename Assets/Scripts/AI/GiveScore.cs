@@ -9,7 +9,7 @@ public class GiveScore : MonoBehaviour
 
     public void AddPlayerScore()
     {
-        if (FindObjectOfType<PlayerController>()) FindObjectOfType<PlayerController>().AddScore(mScore);
+        if (FindObjectOfType<PlayerController>()) FindObjectOfType<PlayerController>().AddScore(new ScorePackage(mScore, true));
         TextMesh tm = Instantiate(mTextObject, GetComponentInParent<Rigidbody>().position, new Quaternion(), null).GetComponentInChildren<TextMesh>();
 
         tm.text = mScore.ToString();

@@ -5830,14 +5830,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8482736540513641978, guid: 9ecf356eff04bef4ca605e142f5a81d6,
         type: 3}
+      propertyPath: mLootObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482736540513641978, guid: 9ecf356eff04bef4ca605e142f5a81d6,
+        type: 3}
       propertyPath: mLootObjects.Array.data[0].m_lootChance
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8482736540513641978, guid: 9ecf356eff04bef4ca605e142f5a81d6,
         type: 3}
       propertyPath: mLootObjects.Array.data[0].m_lootItem
       value: 
-      objectReference: {fileID: 1040850700546488, guid: b46241ddcaa67f64b888efe4744587ec,
+      objectReference: {fileID: 5066654212743628602, guid: 3cfce4b81b1ce4648a2c414c676cd767,
         type: 3}
     - target: {fileID: 8482967669700810604, guid: 9ecf356eff04bef4ca605e142f5a81d6,
         type: 3}

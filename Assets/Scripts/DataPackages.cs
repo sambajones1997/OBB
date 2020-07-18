@@ -12,5 +12,18 @@ public class DamagePackage
         mDamage = damage;
         mDamageDealer = dmgDealer;
     }
+
+}
+
+public class ScorePackage
+{
+    public int mScore;
+    public bool mPlayerKill;
+
+    public ScorePackage(int score, bool playerKill = true)
+    {
+        mScore = score;
+        mPlayerKill = playerKill;
+    }
 }
 

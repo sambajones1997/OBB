@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
         {
             mHealth = 0;
             if (GetComponentInParent<ShipController>()) GetComponentInParent<ShipController>().mLastCauseOfDamage = damagePackage.mDamageDealer;
-            transform.root.SendMessage("Die", SendMessageOptions.DontRequireReceiver);
+            SendMessageUpwards("Die", SendMessageOptions.RequireReceiver);
         }
     }
 

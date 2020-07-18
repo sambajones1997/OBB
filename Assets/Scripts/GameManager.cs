@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     float mBoundaryZ = 85.0f;
 
     public List<GameObject> mPlanets;
+    public Leaderboard mLeaderBoard;
 
     private void Start()
     {
@@ -167,5 +168,11 @@ public class GameManager : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void PlayerHasDied(int mScore)
+    {
+        mLeaderBoard.gameObject.SetActive(true);
+        mLeaderBoard.UpdateList(mScore);
     }
 }
