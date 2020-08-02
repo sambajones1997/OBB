@@ -63,7 +63,6 @@ public class Leaderboard : MonoBehaviour
             {
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    mInstructionText.text = "Hold Button To Quit";
                     bButtonIsHeld = true;
                 }
 
@@ -72,8 +71,12 @@ public class Leaderboard : MonoBehaviour
                     mButtonHold -= Time.deltaTime;
 
                     mHoldTimerBar.transform.localScale = new Vector3(1.0f - (mButtonHold / 2.5f), mHoldTimerBar.transform.localScale.y, mHoldTimerBar.transform.localScale.z);
-                    if (mHoldTimerBar.transform.localScale.x > 1.0f) mHoldTimerBar.transform.localScale = new Vector3(1.0f, mHoldTimerBar.transform.localScale.y, mHoldTimerBar.transform.localScale.z);
-                    if (mButtonHold <= 0.0f) Application.Quit();
+                    if (mHoldTimerBar.transform.localScale.x > 1.0f) 
+                        mHoldTimerBar.transform.localScale = new Vector3(1.0f, mHoldTimerBar.transform.localScale.y, mHoldTimerBar.transform.localScale.z);
+                    if (mButtonHold <= 0.0f) 
+                        Application.Quit();
+                    else if (mButtonHold <= 2.0f)
+                        mInstructionText.text = "Hold Button To Quit";
                 }
             }
         }

@@ -1952,7 +1952,7 @@ PrefabInstance:
     - target: {fileID: 114009007979749006, guid: b6331e7bf4d091349bfcae5b5c59b8e9,
         type: 3}
       propertyPath: m_Text
-      value: Tap LMB To Quit
+      value: Press LMB To Restart
       objectReference: {fileID: 0}
     - target: {fileID: 114009007979749006, guid: b6331e7bf4d091349bfcae5b5c59b8e9,
         type: 3}
