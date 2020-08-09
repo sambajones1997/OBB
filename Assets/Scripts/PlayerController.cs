@@ -10,12 +10,12 @@ public class PlayerController : ShipController
     [SerializeField] protected float mKillStreakTimeOut = 5.0f;
     Rigidbody mRigidBody;
     int mScore = 0;
-
+    bool m_playerIsOutOfBounds = false;
     int mCurrentKills = 0;
     int mCurrentKillStreak = 0;
     float mKillStreakTimer = 0.0f;
     float mTimeSinceLastKill = 0.0f;
-
+    float m_outOfBoundsTimer = 3.0f;
     protected override void OnShipStart()
     {
         if (!mGameUI)
@@ -46,8 +46,18 @@ public class PlayerController : ShipController
 
     private void FixedUpdate()
     {
-        if (bIsAlive) 
+        if (bIsAlive)
+        {
             mGameUI.UpdateHealth(mHealthComponent.mHealth, mHealthComponent.mMaxHealth);
+            if (m_playerIsOutOfBounds)
+            {
+                m_outOfBoundsTimer -= Time.fixedDeltaTime;
+                if (m_outOfBoundsTimer <= 0.0f)
+                {
+                    mHealthComponent.TakeDamage(new DamagePackage(1000, null));
+                }
+            }
+        }
     }
 
     void GameInput()
@@ -95,5 +105,13 @@ public class PlayerController : ShipController
                 // boom double fire rate
             }
         } // else we start the timer at 0.0f
+    }
+
+    protected void OutOfBounds(bool outOfBounds)
+    {
+        m_playerIsOutOfBounds = outOfBounds;
+        mGameUI.SendMessage("PlayerOutOfBounds", m_playerIsOutOfBounds);
+        if (!outOfBounds)
+            m_outOfBoundsTimer = 3.0f;
     }
 }

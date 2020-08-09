@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(MomentumMovement))]
 [RequireComponent(typeof(Health))]
-[RequireComponent(typeof(Boundaries))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(ExplosionComponent))]
 public class ShipController : MonoBehaviour

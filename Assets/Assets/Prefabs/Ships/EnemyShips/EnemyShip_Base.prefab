@@ -15,12 +15,11 @@ GameObject:
   - component: {fileID: 8414416190115126644}
   - component: {fileID: 8483367690888203958}
   - component: {fileID: 8482955624040503688}
-  - component: {fileID: 8483308981333507056}
   - component: {fileID: 8433447617772984350}
   - component: {fileID: 8482736540513641978}
   - component: {fileID: 5852858415490983995}
   - component: {fileID: 9017469276029909159}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: EnemyShip_Base
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -130,18 +129,6 @@ MonoBehaviour:
   mExplosionParticleSystem: {fileID: 1554876137478246, guid: 3836969655f4a8f4290ce980aae54748,
     type: 3}
   mExplosionAudioClip: {fileID: 8300000, guid: 72e76810224064300b7d32e8322a5d12, type: 3}
---- !u!114 &8483308981333507056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8370705102037293966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e935778f50e606408a79a4d705ebeeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &8433447617772984350
 AudioSource:
   m_ObjectHideFlags: 0
@@ -303,7 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8368021555401060990}
   - component: {fileID: 8482918455332911950}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Thruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8368084217384284168}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

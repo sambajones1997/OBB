@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6459184867363227240}
   - component: {fileID: 8867359155012601761}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Blaster_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8748614844894204773}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8748363586468151051}
   - component: {fileID: 8719129445006045393}
   - component: {fileID: 8730909408752352641}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 8748410856526430897}
   - component: {fileID: 8722734121389199679}
   - component: {fileID: 8731025743521028097}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 8752705608582098493}
   - component: {fileID: 8723123806036879045}
   - component: {fileID: 8731419463615597805}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 8752373579153024075}
   - component: {fileID: 8723289196379118055}
   - component: {fileID: 8730605154490981559}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8752486758094257827}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Weapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 8748572568168374779}
   - component: {fileID: 8723271772077975001}
   - component: {fileID: 8730848893806119089}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 8748403339578367183}
   - component: {fileID: 8719049971905704721}
   - component: {fileID: 8731492148223450105}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 8748392470422012201}
   - component: {fileID: 8719174736758337989}
   - component: {fileID: 8731476819926460179}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 8748741594452508713}
   - component: {fileID: 8723395253498436613}
   - component: {fileID: 8731505862338038057}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 8748647618332790559}
   - component: {fileID: 8722820530128317733}
   - component: {fileID: 8730882367153207477}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,7 +853,7 @@ GameObject:
   - component: {fileID: 8752604917342889643}
   - component: {fileID: 8723081622600130307}
   - component: {fileID: 8731571532083966125}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -934,7 +934,7 @@ GameObject:
   - component: {fileID: 8752419654726797255}
   - component: {fileID: 8719113561742446523}
   - component: {fileID: 8731107135554261795}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1015,7 @@ GameObject:
   - component: {fileID: 8748717725554053023}
   - component: {fileID: 8723308864957867015}
   - component: {fileID: 8731586520045126749}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1096,7 +1096,7 @@ GameObject:
   - component: {fileID: 8748388904261422891}
   - component: {fileID: 8719065985127475551}
   - component: {fileID: 8731629992010478005}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,7 +1177,7 @@ GameObject:
   - component: {fileID: 8748699053417568897}
   - component: {fileID: 8723203722503977875}
   - component: {fileID: 8731430096872321189}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1258,7 +1258,7 @@ GameObject:
   - component: {fileID: 8752612421123489651}
   - component: {fileID: 8722987630271893281}
   - component: {fileID: 8730572111864184309}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1339,7 +1339,7 @@ GameObject:
   - component: {fileID: 8748329971118581073}
   - component: {fileID: 8722832898926293539}
   - component: {fileID: 8731260925844797391}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1420,7 +1420,7 @@ GameObject:
   - component: {fileID: 8748672739483916839}
   - component: {fileID: 8722650583803310321}
   - component: {fileID: 8731293157460513827}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1501,7 +1501,7 @@ GameObject:
   - component: {fileID: 8752571254076749211}
   - component: {fileID: 8719247549692975419}
   - component: {fileID: 8731197124526102375}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1582,7 +1582,7 @@ GameObject:
   - component: {fileID: 8748630357766675801}
   - component: {fileID: 8723303793535094319}
   - component: {fileID: 8731380793706255313}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1663,7 +1663,7 @@ GameObject:
   - component: {fileID: 8748773264296694801}
   - component: {fileID: 8722946152315126569}
   - component: {fileID: 8730906648641940419}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1744,7 +1744,7 @@ GameObject:
   - component: {fileID: 8748460624055367701}
   - component: {fileID: 8719073188908982195}
   - component: {fileID: 8730948341466263897}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1825,7 +1825,7 @@ GameObject:
   - component: {fileID: 8752664844842662519}
   - component: {fileID: 8723118512760119413}
   - component: {fileID: 8731080347082576433}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1906,7 +1906,7 @@ GameObject:
   - component: {fileID: 8748661044126070687}
   - component: {fileID: 8719192462369296449}
   - component: {fileID: 8731143984171139053}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1987,7 +1987,7 @@ GameObject:
   - component: {fileID: 8748781903204893335}
   - component: {fileID: 8722782944580286381}
   - component: {fileID: 8730844787073253423}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2068,7 +2068,7 @@ GameObject:
   - component: {fileID: 8752334776948711711}
   - component: {fileID: 8722786521222304055}
   - component: {fileID: 8731617376376421591}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2153,10 +2153,9 @@ GameObject:
   - component: {fileID: 8714242324416651201}
   - component: {fileID: 8713911697426730393}
   - component: {fileID: 8713736067596737543}
-  - component: {fileID: 8714019250575463097}
   - component: {fileID: 8673277171531867927}
   - component: {fileID: 3795220865801923535}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PlayerShip_Base
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2271,8 +2270,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mLastCauseOfDamage: {fileID: 0}
+  mShipRotationSpeed: 90
   mGameUI: {fileID: 0}
-  mLeaderboard: {fileID: 0}
+  mGameManager: {fileID: 0}
+  mKillStreakTimeOut: 5
 --- !u!114 &8714242324416651201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2316,18 +2317,6 @@ MonoBehaviour:
   mExplosionParticleSystem: {fileID: 1554876137478246, guid: 3836969655f4a8f4290ce980aae54748,
     type: 3}
   mExplosionAudioClip: {fileID: 8300000, guid: a019ae3af8e864616b85773c509f5285, type: 3}
---- !u!114 &8714019250575463097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8754210476511289031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e935778f50e606408a79a4d705ebeeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &8673277171531867927
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2454,7 +2443,7 @@ GameObject:
   - component: {fileID: 8748630016787588423}
   - component: {fileID: 8722986313395329415}
   - component: {fileID: 8731389685767414687}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2535,7 +2524,7 @@ GameObject:
   - component: {fileID: 8752667141338561041}
   - component: {fileID: 8723464837262578249}
   - component: {fileID: 8730949650571118315}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2616,7 +2605,7 @@ GameObject:
   - component: {fileID: 8748598295463000343}
   - component: {fileID: 8723423829513071453}
   - component: {fileID: 8730862778932033573}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2697,7 +2686,7 @@ GameObject:
   - component: {fileID: 8752548607531074845}
   - component: {fileID: 8723288522325244813}
   - component: {fileID: 8731868738214384673}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2778,7 +2767,7 @@ GameObject:
   - component: {fileID: 8752511509710469933}
   - component: {fileID: 8722807902666276805}
   - component: {fileID: 8731344057162409453}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2859,7 +2848,7 @@ GameObject:
   - component: {fileID: 8752661089026303659}
   - component: {fileID: 8722673885496085377}
   - component: {fileID: 8731334245083238769}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2940,7 +2929,7 @@ GameObject:
   - component: {fileID: 8748293779351552563}
   - component: {fileID: 8722641585921281843}
   - component: {fileID: 8731313668047662195}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3021,7 +3010,7 @@ GameObject:
   - component: {fileID: 8748676431441592177}
   - component: {fileID: 8723421986103601445}
   - component: {fileID: 8730828184857715117}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3102,7 +3091,7 @@ GameObject:
   - component: {fileID: 8752668703407355237}
   - component: {fileID: 8723465638105103127}
   - component: {fileID: 8730943706214508699}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3183,7 +3172,7 @@ GameObject:
   - component: {fileID: 8752252872179241239}
   - component: {fileID: 8723368300833922753}
   - component: {fileID: 8731091008119613821}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3264,7 +3253,7 @@ GameObject:
   - component: {fileID: 8752534337046202539}
   - component: {fileID: 8723143565195663359}
   - component: {fileID: 8731534799868085039}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3344,7 +3333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8752242758931110991}
   - component: {fileID: 8714225017381369339}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Thruster (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3390,7 +3379,7 @@ GameObject:
   - component: {fileID: 8752571019287115085}
   - component: {fileID: 8723345938689314839}
   - component: {fileID: 8731365699183844845}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3470,7 +3459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8752697171593944541}
   - component: {fileID: 8713752370116218279}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Thruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3516,7 +3505,7 @@ GameObject:
   - component: {fileID: 8752381823975930959}
   - component: {fileID: 8723416362692451091}
   - component: {fileID: 8731265214858050451}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3597,7 +3586,7 @@ GameObject:
   - component: {fileID: 8752350864135621077}
   - component: {fileID: 8719053135945526355}
   - component: {fileID: 8731168427062168529}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3677,7 +3666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8752552348509750663}
   - component: {fileID: 8714305328066033823}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Thruster (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3723,7 +3712,7 @@ GameObject:
   - component: {fileID: 8748702278949703253}
   - component: {fileID: 8722723814085289189}
   - component: {fileID: 8731067757147701585}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3804,7 +3793,7 @@ GameObject:
   - component: {fileID: 8748270472100816567}
   - component: {fileID: 8722793221405129889}
   - component: {fileID: 8731016808510296181}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3885,7 +3874,7 @@ GameObject:
   - component: {fileID: 8752297915074911281}
   - component: {fileID: 8723001334125913401}
   - component: {fileID: 8731402976438297561}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3966,7 +3955,7 @@ GameObject:
   - component: {fileID: 8752335072341910861}
   - component: {fileID: 8723235767118288971}
   - component: {fileID: 8731075945116366895}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4047,7 +4036,7 @@ GameObject:
   - component: {fileID: 8748741136359257909}
   - component: {fileID: 8722701269734055017}
   - component: {fileID: 8731572723065109681}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4128,7 +4117,7 @@ GameObject:
   - component: {fileID: 8752311779301739547}
   - component: {fileID: 8723337314969923187}
   - component: {fileID: 8730978701337169149}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4209,7 +4198,7 @@ GameObject:
   - component: {fileID: 8748696850981541623}
   - component: {fileID: 8723423493353741079}
   - component: {fileID: 8730830581109868597}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutlineVoxels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
