@@ -10,9 +10,9 @@ public class KillBox : MonoBehaviour
         if (other.gameObject.layer == 12)
         {
             if (m_invert)
-                other.gameObject.SendMessage("OutOfBounds", false);
+                other.gameObject.SendMessage("OutOfBounds", false, SendMessageOptions.DontRequireReceiver);
             else
-                other.gameObject.SendMessage("OutOfBounds", true);
+                other.gameObject.SendMessage("OutOfBounds", true, SendMessageOptions.DontRequireReceiver);
         }
     }
 
@@ -21,9 +21,9 @@ public class KillBox : MonoBehaviour
         if (other.gameObject.layer == 12)
         {
             if (m_invert)
-                other.gameObject.SendMessage("OutOfBounds", true);
+                other.gameObject.SendMessage("OutOfBounds", true, SendMessageOptions.DontRequireReceiver);
             else
-                other.gameObject.SendMessage("OutOfBounds", false);
+                other.gameObject.SendMessage("OutOfBounds", false, SendMessageOptions.DontRequireReceiver);
         }
     }
 }

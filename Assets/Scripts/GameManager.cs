@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
     public GameObject mDroneObject;
     public GameObject mMineObject;
 
-    float mBoundaryX = 135.0f;
-    float mBoundaryZ = 85.0f;
+    float mBoundaryX = 150;
+    float mBoundaryZ = 75;
 
     public List<GameObject> mPlanets;
     public Leaderboard mLeaderBoard;

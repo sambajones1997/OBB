@@ -5,17 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerWeaponController))]
 public class PlayerController : ShipController
 {
+    [Header("Player Controller")]
     public GameUI mGameUI;
     public GameManager mGameManager;
+    [SerializeField] protected GameObject m_directionArrow;
     [SerializeField] protected float mKillStreakTimeOut = 5.0f;
-    Rigidbody mRigidBody;
-    int mScore = 0;
-    bool m_playerIsOutOfBounds = false;
-    int mCurrentKills = 0;
-    int mCurrentKillStreak = 0;
-    float mKillStreakTimer = 0.0f;
-    float mTimeSinceLastKill = 0.0f;
-    float m_outOfBoundsTimer = 3.0f;
+    [SerializeField] protected float m_playerSpeed = 20.0f;
+    protected float m_KillStreakTimer = 0.0f;
+    protected float m_TimeSinceLastKill = 0.0f;
+    protected int mScore = 0;
+    protected int m_CurrentKills = 0;
+    protected int m_CurrentKillStreak = 0;
+
+    protected Vector3 m_movementVector;
+
     protected override void OnShipStart()
     {
         if (!mGameUI)
@@ -28,18 +31,19 @@ public class PlayerController : ShipController
         Cursor.lockState = CursorLockMode.Locked;
         mGameUI.UpdateHealth(mHealthComponent.mHealth, mHealthComponent.mMaxHealth);
         mGameUI.UpdateScore(mScore);
-        mRigidBody = GetComponent<Rigidbody>();
+
+        m_movementVector = Vector3.forward;
     }
     // Update is called once per frame
     protected override void OnShipUpdate ()
     {
         mWeaponController.FireWeapon();
-        mTimeSinceLastKill += Time.deltaTime;
-        if (mTimeSinceLastKill >= mKillStreakTimeOut)
+        m_TimeSinceLastKill += Time.deltaTime;
+        if (m_TimeSinceLastKill >= mKillStreakTimeOut)
         {
-            mTimeSinceLastKill = 0.0f;
-            mKillStreakTimer = 0.0f;
-            mCurrentKillStreak = 0;
+            m_TimeSinceLastKill = 0.0f;
+            m_KillStreakTimer = 0.0f;
+            m_CurrentKillStreak = 0;
         }
         GameInput();
     }
@@ -49,28 +53,24 @@ public class PlayerController : ShipController
         if (bIsAlive)
         {
             mGameUI.UpdateHealth(mHealthComponent.mHealth, mHealthComponent.mMaxHealth);
-            if (m_playerIsOutOfBounds)
-            {
-                m_outOfBoundsTimer -= Time.fixedDeltaTime;
-                if (m_outOfBoundsTimer <= 0.0f)
-                {
-                    mHealthComponent.TakeDamage(new DamagePackage(1000, null));
-                }
-            }
         }
     }
 
     void GameInput()
     {
-        if (Input.GetButton("Fire1"))
+        Vector3 moveVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
+        moveVector.Normalize();
+        if (moveVector.sqrMagnitude > 0.0f)
         {
-            mRigidBody.transform.Rotate(Vector3.up * Time.deltaTime * -mShipRotationSpeed);
+            m_movementVector = moveVector;
+            m_directionArrow.transform.rotation = Quaternion.Euler(0.0f, Vector3.SignedAngle(Vector3.forward, m_movementVector, Vector3.up), 0.0f);
         }
+        m_rigidBody.MovePosition(m_rigidBody.position + (m_movementVector * m_playerSpeed * Time.deltaTime));
 
-        if (Input.GetButton("Fire2"))
-        {
-            mRigidBody.transform.Rotate(Vector3.up * Time.deltaTime * mShipRotationSpeed);
-        }
+
+        Vector3 shootVector = new Vector3(Input.GetAxisRaw("ShootHorizontal"), 0.0f, Input.GetAxisRaw("ShootVertical"));
+        if (shootVector.sqrMagnitude > 0.0f)
+            m_shipBase.transform.localRotation = Quaternion.Euler(0.0f, Vector3.SignedAngle(Vector3.forward, shootVector, Vector3.up), 0.0f);
     }
 
     public void AddScore(ScorePackage scorePackage)
@@ -82,8 +82,8 @@ public class PlayerController : ShipController
 
         if (scorePackage.mPlayerKill)
         {
-            ++mCurrentKills;
-            ++mCurrentKillStreak;
+            ++m_CurrentKills;
+            ++m_CurrentKillStreak;
             KillStreakCalculator();
         }
     }
@@ -97,21 +97,20 @@ public class PlayerController : ShipController
 
     protected void KillStreakCalculator()
     {
-        if (mCurrentKillStreak > 0)
+        if (m_CurrentKillStreak > 0)
         {
-            mKillStreakTimer += mTimeSinceLastKill;
-            if (mCurrentKillStreak >= 10 && mCurrentKillStreak <= 20)
+            m_KillStreakTimer += m_TimeSinceLastKill;
+            if (m_CurrentKillStreak >= 10 && m_CurrentKillStreak <= 20)
             {
                 // boom double fire rate
             }
         } // else we start the timer at 0.0f
     }
 
-    protected void OutOfBounds(bool outOfBounds)
+    // Kill player straight away
+    protected void OutOfBounds(bool isOutOfBounds)
     {
-        m_playerIsOutOfBounds = outOfBounds;
-        mGameUI.SendMessage("PlayerOutOfBounds", m_playerIsOutOfBounds);
-        if (!outOfBounds)
-            m_outOfBoundsTimer = 3.0f;
+        if (isOutOfBounds)
+            mHealthComponent.TakeDamage(new DamagePackage(1000, null));
     }
 }

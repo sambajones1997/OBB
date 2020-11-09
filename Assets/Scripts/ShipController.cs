@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-[RequireComponent(typeof(MomentumMovement))]
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(ExplosionComponent))]
 public class ShipController : MonoBehaviour
 {
+    [Header("Ship Controller")]
+    [SerializeField] protected GameObject m_shipRoot; // Root of the ship that will move forward and will be kept in relation to world x,y,z -- if this rotates, the player rotates
+    [SerializeField] protected GameObject m_shipBase; // Base of the ship that will be used to rotate and shoot at the enemies. If this rotates, it doesnt affect ship movement
     public GameObject mLastCauseOfDamage;
     protected Health mHealthComponent;
     protected WeaponController mWeaponController;
+    protected Rigidbody m_rigidBody;
 
     protected bool bIsAlive = true;
     [SerializeField] protected float mShipRotationSpeed = 90.0f;
@@ -19,6 +22,7 @@ public class ShipController : MonoBehaviour
     {
         mWeaponController = GetComponentInChildren<WeaponController>();
         mHealthComponent = GetComponent<Health>();
+        m_rigidBody = GetComponentInChildren<Rigidbody>();
         OnShipStart();
         if (!mWeaponController)
             Die();

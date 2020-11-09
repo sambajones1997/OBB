@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(WeaponController))]
 public class AIShipController : ShipController
 {
+    [Header("AI Controller")]
     public GameManager.EEnemyType mEnemyType;
     public float mShipShootAngle = 15.0f;
     public PlayerController mPlayerShip;
