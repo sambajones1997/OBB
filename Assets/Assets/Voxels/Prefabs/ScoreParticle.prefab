@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 5587305000088959592}
   - component: {fileID: 5615757192591095332}
   - component: {fileID: 5606731354283219906}
+  - component: {fileID: 3097921114646478382}
   m_Layer: 0
   m_Name: ScoreParticle
   m_TagString: Untagged
@@ -156,7 +157,7 @@ Transform:
   m_GameObject: {fileID: 5591656261491083638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4, y: 0, z: 5}
-  m_LocalScale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2106301135338981258}
   m_Father: {fileID: 0}
@@ -211,3 +212,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3097921114646478382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5591656261491083638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d00e4b56a6ba9f429a12de4e66bd45a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_score: 25
+  m_playerObject: {fileID: 0}

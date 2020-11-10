@@ -66,7 +66,7 @@ public class AIShipController : ShipController
     protected override void OnShipDie()
     {
         base.OnShipDie();
-        GetComponent<GiveScore>().AddPlayerScore();
+        BroadcastMessage("SetupScoreController", SendMessageOptions.DontRequireReceiver);
         FindObjectOfType<GameManager>().DestroyedShip(mEnemyType);
         if (GetComponent<SpawnLoot>() && Random.Range(0, 10) >= 9) GetComponent<SpawnLoot>().DropLoot();
     }
