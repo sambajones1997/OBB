@@ -13,19 +13,22 @@ public class AIShipController : ShipController
     [SerializeField] protected float m_maxPlayerReaction = 0.2f; // time it takes to spot player and shoot at them
     [SerializeField] protected float m_maxShipTurnTimer = 0.05f;
     protected float m_shipTurnTimer = 0.05f;
+    MomentumMovement m_momentumMovement;
 
     // Start is called before the first frame update
     protected override void OnShipStart()
     {
         base.OnShipStart(); 
         if (FindObjectOfType<PlayerController>()) mPlayerShip = FindObjectOfType<PlayerController>();
+        m_momentumMovement = GetComponentInChildren<MomentumMovement>();
     }
 
     protected override void OnShipFixedUpdate()
     {
         base.OnShipFixedUpdate();
-        if (bIsAlive)
+        if (m_isAlive)
         {
+            m_momentumMovement.AddInput(transform.forward);
             if (mPlayerShip)
             {
                 m_shipTurnTimer -= Time.fixedDeltaTime;
@@ -66,8 +69,12 @@ public class AIShipController : ShipController
     protected override void OnShipDie()
     {
         base.OnShipDie();
-        BroadcastMessage("SetupScoreController", SendMessageOptions.DontRequireReceiver);
+        if (mLastCauseOfDamage.transform.root == mPlayerShip.transform.root)
+        {
+            BroadcastMessage("SetupScoreController", SendMessageOptions.DontRequireReceiver);
+        }
         FindObjectOfType<GameManager>().DestroyedShip(mEnemyType);
         if (GetComponent<SpawnLoot>() && Random.Range(0, 10) >= 9) GetComponent<SpawnLoot>().DropLoot();
+        Destroy(gameObject, 1.0f);
     }
 }

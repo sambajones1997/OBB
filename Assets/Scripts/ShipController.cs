@@ -16,7 +16,7 @@ public class ShipController : MonoBehaviour
     protected WeaponController mWeaponController;
     protected Rigidbody m_rigidBody;
 
-    protected bool bIsAlive = true;
+    protected bool m_isAlive = true;
     [SerializeField] protected float mShipRotationSpeed = 90.0f;
     void Start()
     {
@@ -40,7 +40,7 @@ public class ShipController : MonoBehaviour
 
     protected void Die()
     {
-        if (!bIsAlive)
+        if (!m_isAlive)
             return;
 
         OnShipDie();
@@ -50,9 +50,8 @@ public class ShipController : MonoBehaviour
         {
             Destroy(v);
         }
-        bIsAlive = false;
-        Destroy(gameObject, 1.0f);
-        enabled = false;
+        m_isAlive = false;
+        //enabled = false;
     }
 
     protected virtual void OnShipStart() { }
@@ -60,4 +59,6 @@ public class ShipController : MonoBehaviour
     protected virtual void OnShipUpdate() { }
     protected virtual void RotateShip() { }
     protected virtual void OnShipDie() { }
+
+    public bool IsAlive() { return m_isAlive; }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreVoxelComponent : MonoBehaviour
 {
-    [HideInInspector] public PlayerController m_playerObject;
+    [HideInInspector] public PlayerController m_playerController;
     [HideInInspector] public int m_score = 25;
     private float m_scoreSpeed = 0.0f;
     private float m_maxScoreSpeed = 100.0f;
@@ -29,24 +29,34 @@ public class ScoreVoxelComponent : MonoBehaviour
         }
         else
         {
-            if (!m_playerObject)
-                Destroy(gameObject);
-            m_scoreSpeed += Time.fixedDeltaTime * Random.Range(1.0f, m_maxAcceleration);
-            Mathf.Clamp(m_score, 0.0f, m_maxScoreSpeed);
-            transform.LookAt(m_playerObject.transform);
-            transform.Translate(Vector3.forward * m_scoreSpeed * Time.fixedDeltaTime);
-
-            if ((m_playerObject.transform.position - transform.position).sqrMagnitude <= 1.0f)
+            if (!m_playerController.IsAlive())
             {
-                if (!m_scoreGiven)
-                {
-                    ScorePackage scorePackage = new ScorePackage(m_score, true);
-                    m_playerObject.AddScore(scorePackage);
-                    m_scoreGiven = true;
-                    Destroy(gameObject);
-                }
+                GiveScore();
             }
+            else
+            {
+                m_scoreSpeed += Time.fixedDeltaTime * Random.Range(1.0f, m_maxAcceleration);
+                Mathf.Clamp(m_score, 0.0f, m_maxScoreSpeed);
+                transform.LookAt(m_playerController.transform);
+                transform.Translate(Vector3.forward * m_scoreSpeed * Time.fixedDeltaTime);
+
+                if ((m_playerController.transform.position - transform.position).sqrMagnitude <= 1.0f)
+                {
+                    if (!m_scoreGiven)
+                    {
+                        GiveScore();
+                    }
+                }
+            }   
         }
+    }
+
+    void GiveScore()
+    {
+        ScorePackage scorePackage = new ScorePackage(m_score, true);
+        m_playerController.AddScore(scorePackage);
+        m_scoreGiven = true;
+        Destroy(gameObject);
     }
 
 }

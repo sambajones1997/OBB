@@ -10,7 +10,6 @@ public class PlayerController : ShipController
     public GameManager mGameManager;
     [SerializeField] protected GameObject m_directionArrow;
     [SerializeField] protected float mKillStreakTimeOut = 5.0f;
-    [SerializeField] protected float m_playerSpeed = 20.0f;
     protected float m_KillStreakTimer = 0.0f;
     protected float m_TimeSinceLastKill = 0.0f;
     protected int mScore = 0;
@@ -18,7 +17,9 @@ public class PlayerController : ShipController
     protected int m_CurrentKillStreak = 0;
 
     protected Vector3 m_movementVector;
+    protected MomentumMovement m_momentumMovement;
 
+    protected float m_playerDeathTimer = -1.0f;
     protected override void OnShipStart()
     {
         if (!mGameUI)
@@ -26,6 +27,9 @@ public class PlayerController : ShipController
 
         if (!mGameManager)
             mGameManager = FindObjectOfType<GameManager>();
+
+        if (!m_momentumMovement)
+            m_momentumMovement = GetComponentInChildren<MomentumMovement>();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -37,20 +41,34 @@ public class PlayerController : ShipController
     // Update is called once per frame
     protected override void OnShipUpdate ()
     {
-        mWeaponController.FireWeapon();
-        m_TimeSinceLastKill += Time.deltaTime;
-        if (m_TimeSinceLastKill >= mKillStreakTimeOut)
+        if (m_isAlive)
         {
-            m_TimeSinceLastKill = 0.0f;
-            m_KillStreakTimer = 0.0f;
-            m_CurrentKillStreak = 0;
+            mWeaponController.FireWeapon();
+            m_TimeSinceLastKill += Time.deltaTime;
+            if (m_TimeSinceLastKill >= mKillStreakTimeOut)
+            {
+                m_TimeSinceLastKill = 0.0f;
+                m_KillStreakTimer = 0.0f;
+                m_CurrentKillStreak = 0;
+            }
+            GameInput();
         }
-        GameInput();
+        else
+        {
+            if (m_playerDeathTimer > 0.0f)
+            {
+                m_playerDeathTimer -= Time.deltaTime;
+                if (m_playerDeathTimer <= 0.0f)
+                {
+                    mGameManager.SendMessage("PlayerHasDied", mScore);
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        if (bIsAlive)
+        if (m_isAlive)
         {
             mGameUI.UpdateHealth(mHealthComponent.mHealth, mHealthComponent.mMaxHealth);
         }
@@ -65,10 +83,10 @@ public class PlayerController : ShipController
             m_movementVector = moveVector;
             m_directionArrow.transform.rotation = Quaternion.Euler(0.0f, Vector3.SignedAngle(Vector3.forward, m_movementVector, Vector3.up), 0.0f);
         }
-        m_rigidBody.MovePosition(m_rigidBody.position + (m_movementVector * m_playerSpeed * Time.deltaTime));
+        m_momentumMovement.AddInput(m_movementVector);
 
 
-        Vector3 shootVector = new Vector3(Input.GetAxisRaw("ShootHorizontal"), 0.0f, Input.GetAxisRaw("ShootVertical"));
+         Vector3 shootVector = new Vector3(Input.GetAxisRaw("ShootHorizontal"), 0.0f, Input.GetAxisRaw("ShootVertical"));
         if (shootVector.sqrMagnitude > 0.0f)
             m_shipBase.transform.localRotation = Quaternion.Euler(0.0f, Vector3.SignedAngle(Vector3.forward, shootVector, Vector3.up), 0.0f);
     }
@@ -90,9 +108,8 @@ public class PlayerController : ShipController
 
     protected override void OnShipDie()
     {
-        mGameManager.SendMessage("PlayerHasDied", mScore);
+        m_playerDeathTimer = 1.0f;
         mGameUI.gameObject.SetActive(false);
-        FindObjectOfType<GameManager>().bIsPlayerAlive = false;
     }
 
     protected void KillStreakCalculator()

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public int mNumberOfDronesKilled = 0;
     public int mNumberOfMinesKilled = 0;
 
-    public bool bIsPlayerAlive = false;
+    public bool m_isPlayerAlive = false;
 
     public GameObject mFighterObject;
     public GameObject mShipObject;
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (bIsPlayerAlive)
+        if (m_isPlayerAlive)
         {
             if (mCurrentNumberOfFighters < mMaxNumberOfFighters)
             {
@@ -174,5 +174,6 @@ public class GameManager : MonoBehaviour
     {
         mLeaderBoard.gameObject.SetActive(true);
         mLeaderBoard.UpdateList(mScore);
+        m_isPlayerAlive = false;
     }
 }

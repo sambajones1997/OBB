@@ -24,7 +24,7 @@ public class CountDownTimer : MonoBehaviour
 
         if (mCountDownTimer <= -1.0f)
         {
-            FindObjectOfType<GameManager>().bIsPlayerAlive = true;
+            FindObjectOfType<GameManager>().m_isPlayerAlive = true;
             mPlayerShip.SetActive(true);
             mGameCanvas.gameObject.SetActive(true);
             Destroy(gameObject);

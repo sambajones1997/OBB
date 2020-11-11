@@ -23,7 +23,7 @@ public class ScoreController : MonoBehaviour
             foreach (var score in m_scoreVoxels)
             {
                 score.m_score = scorePerVoxel;
-                score.m_playerObject = m_playerController;
+                score.m_playerController = m_playerController;
                 score.gameObject.SetActive(true);
             }
             m_scoreVoxels[0].m_score += remaining; // if we have some left over e.g. 100 / 99 would leave 1 remaining in floating so add that to first one

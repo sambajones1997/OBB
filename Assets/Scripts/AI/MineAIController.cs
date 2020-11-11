@@ -23,7 +23,7 @@ public class MineAIController : ShipController
     protected override void OnShipFixedUpdate()
     {
         base.OnShipFixedUpdate();
-        if (bIsAlive)
+        if (m_isAlive)
         {
             if (mHomingTarget) FaceHomingTarget();
             if ((mHomingTimer -= Time.fixedDeltaTime) <= 0.0f)
@@ -59,7 +59,7 @@ public class MineAIController : ShipController
 
     private void OnTriggerEnter(Collider other)
     {
-        if (bIsAlive)
+        if (m_isAlive)
         {
             DamagePackage damagePackage = new DamagePackage(mDamage, gameObject);
             gameObject.SendMessage("TakeDamage", damagePackage, SendMessageOptions.DontRequireReceiver);

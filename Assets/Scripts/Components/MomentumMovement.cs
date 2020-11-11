@@ -16,14 +16,13 @@ public class MomentumMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        AddInput(Vector3.forward);
         mRigidBody.MovePosition(mRigidBody.position + (mMomentumVector * mShipSpeed * Time.fixedDeltaTime));
     }
 
     public void AddInput(Vector3 momentum)
     {
         mMomentumVector *= 0.75f;
-        Vector3 newMomentum = mMomentumVector + (transform.forward * Time.fixedDeltaTime);
+        Vector3 newMomentum = mMomentumVector + (momentum * Time.fixedDeltaTime);
         newMomentum.y = 0.0f;
         mMomentumVector = newMomentum.normalized;
     }
