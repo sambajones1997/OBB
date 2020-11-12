@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Controllers/MineAIController")]
+
 public class MineAIController : ShipController
 {
     float mHomingTimer = 1.0f;
@@ -54,7 +56,6 @@ public class MineAIController : ShipController
     protected override void OnShipDie()
     {
         GetComponent<GiveScore>().AddPlayerScore();
-        FindObjectOfType<GameManager>().DestroyedShip(GameManager.EEnemyType.Mine);
     }
 
     private void OnTriggerEnter(Collider other)

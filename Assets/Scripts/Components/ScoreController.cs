@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Controllers/ScoreController")]
 public class ScoreController : MonoBehaviour
 {
     [SerializeField] protected int m_scoreToGive = 100;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("GamePlay/Health")]
 public class Health : MonoBehaviour
 {
     public int mHealth = 100;

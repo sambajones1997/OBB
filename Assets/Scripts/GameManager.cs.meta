@@ -12,7 +12,7 @@ MonoImporter:
       type: 2}
   - mMineObject: {fileID: 1848800402399958, guid: 5f8c8775051050f4685c6a9c57f68cac,
       type: 2}
-  executionOrder: 0
+  executionOrder: 100
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

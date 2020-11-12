@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Controllers/PlayerController")]
 [RequireComponent(typeof(PlayerWeaponController))]
 public class PlayerController : ShipController
 {

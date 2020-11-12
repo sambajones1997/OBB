@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7014051329478931952}
   - component: {fileID: 8199376195763749024}
+  - component: {fileID: 6561710199302074413}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -44,16 +45,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29e9cdb84e5d94984e4f9dceb86547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_spawnerType: 0
   m_entitiesToSpawn: []
   m_entitySpawnLocations:
   - {fileID: 4319557055117096718}
   m_entitiesSpawned: []
+  m_spawnArea: {fileID: 6561710199302074413}
   m_initialSpawned: 0
   m_maxActiveNumber: 1
   m_totalToSpawn: 0
   m_minTimeBetweenSpawn: 1
   m_maxTimeBetweenSpawn: 1
   m_bResetSpawner: 0
+  m_randomiseSpawnY: 0
+--- !u!65 &6561710199302074413
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344704035184709170}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4319557055117096718
 GameObject:
   m_ObjectHideFlags: 0

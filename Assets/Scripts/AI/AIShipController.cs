@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Controllers/AIShipController")]
 [RequireComponent(typeof(WeaponController))]
 public class AIShipController : ShipController
 {
     [Header("AI Controller")]
-    public GameManager.EEnemyType mEnemyType;
     public float mShipShootAngle = 15.0f;
     public PlayerController mPlayerShip;
     protected float m_playerReaction = 0.2f;
@@ -73,7 +73,6 @@ public class AIShipController : ShipController
         {
             BroadcastMessage("SetupScoreController", SendMessageOptions.DontRequireReceiver);
         }
-        FindObjectOfType<GameManager>().DestroyedShip(mEnemyType);
         if (GetComponent<SpawnLoot>() && Random.Range(0, 10) >= 9) GetComponent<SpawnLoot>().DropLoot();
         Destroy(gameObject, 1.0f);
     }

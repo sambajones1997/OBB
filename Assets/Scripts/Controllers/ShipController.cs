@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Controllers/ShipController")]
+
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(AudioSource))]
