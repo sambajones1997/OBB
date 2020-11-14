@@ -13,20 +13,21 @@ public class ShipController : MonoBehaviour
     [Header("Ship Controller")]
     [SerializeField] protected GameObject m_shipRoot; // Root of the ship that will move forward and will be kept in relation to world x,y,z -- if this rotates, the player rotates
     [SerializeField] protected GameObject m_shipBase; // Base of the ship that will be used to rotate and shoot at the enemies. If this rotates, it doesnt affect ship movement
-    public GameObject mLastCauseOfDamage;
-    protected Health mHealthComponent;
-    protected WeaponController mWeaponController;
+    public GameObject m_lastCauseOfDamage;
+    protected Health m_healthComponent;
+    protected WeaponController m_weaponController;
     protected Rigidbody m_rigidBody;
+    protected GameManager m_gameManager;
 
     protected bool m_isAlive = true;
-    [SerializeField] protected float mShipRotationSpeed = 90.0f;
+    [SerializeField] protected float m_shipRotationSpeed = 90.0f;
     void Start()
     {
-        mWeaponController = GetComponentInChildren<WeaponController>();
-        mHealthComponent = GetComponent<Health>();
+        m_weaponController = GetComponentInChildren<WeaponController>();
+        m_healthComponent = GetComponent<Health>();
         m_rigidBody = GetComponentInChildren<Rigidbody>();
         OnShipStart();
-        if (!mWeaponController)
+        if (!m_weaponController)
             Die();
     }
 
@@ -47,10 +48,18 @@ public class ShipController : MonoBehaviour
 
         OnShipDie();
         gameObject.SendMessage("Explode", SendMessageOptions.DontRequireReceiver);
+        // we'll disable components we no-longer want active rather than destroying for two reasons
+        // Destroying is more likely more expensive, uncoupling it from the game object - simply disabling it will work well for us
+        // Destroying a component is not done on the same-frame. 
+        // 3. We'll be destroying the game object soon anyway so might as well skip the whole de-activation thing.
         GetComponent<Collider>().enabled = false;
         foreach (var v in GetComponentsInChildren<Renderer>())
         {
-            Destroy(v);
+            v.enabled = false;
+        }
+        foreach (var t in GetComponentsInChildren<Thruster>())
+        {
+            t.enabled = false;
         }
         m_isAlive = false;
         //enabled = false;
@@ -63,4 +72,11 @@ public class ShipController : MonoBehaviour
     protected virtual void OnShipDie() { }
 
     public bool IsAlive() { return m_isAlive; }
+
+    public void TakenDamage(GameObject causeOfDamage = null) { m_lastCauseOfDamage = causeOfDamage; }
+
+    public void SetGameManager(GameManager gameManager)
+    {
+        m_gameManager = gameManager;
+    }
 }

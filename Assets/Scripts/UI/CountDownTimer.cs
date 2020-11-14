@@ -5,17 +5,21 @@ using UnityEngine.UI;
 
 public class CountDownTimer : MonoBehaviour
 {
-    public GameObject mPlayerShip;
+    [SerializeField] private GameManager m_gameManager;
     public float mCountDownTimer = 5.0f; // How long the game should count in for
     public Text mCountDownText;
     public Canvas mGameCanvas;
 
+    // Update is called once per frame
+
     private void Start()
     {
-        mPlayerShip.SetActive(false);
+       if (!m_gameManager)
+        {
+            m_gameManager = FindObjectOfType<GameManager>();
+        }
     }
 
-    // Update is called once per frame
     void FixedUpdate ()
     {
         mCountDownTimer -= Time.fixedDeltaTime;
@@ -24,9 +28,8 @@ public class CountDownTimer : MonoBehaviour
 
         if (mCountDownTimer <= -1.0f)
         {
-            FindObjectOfType<GameManager>().m_isPlayerAlive = true;
-            mPlayerShip.SetActive(true);
             mGameCanvas.gameObject.SetActive(true);
+            m_gameManager.SendMessage("GameStart");
             Destroy(gameObject);
         }
 	}

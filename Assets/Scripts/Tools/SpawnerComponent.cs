@@ -29,6 +29,7 @@ public class SpawnerComponent : MonoBehaviour
     protected int m_entitySpawnIndex = 0;
     protected int m_locationSpawnIndex = 0;
 
+    GameManager m_gameManager;
     float m_timeBetweenSpawn = 0.0f;
     // Start is called before the first frame update
 
@@ -43,7 +44,8 @@ public class SpawnerComponent : MonoBehaviour
             case ESpawnerType.Area:
                 if (!m_spawnArea && !(m_spawnArea = GetComponentInChildren<BoxCollider>())) // if there is no spawn area and one is not found in the children
                 {
-                     m_spawnArea = gameObject.AddComponent<BoxCollider>(); // add a basic spawn area
+                    m_spawnArea = gameObject.AddComponent<BoxCollider>(); // add a basic spawn area
+                    m_spawnArea.gameObject.layer = 14;
                 }
                 m_spawnArea.isTrigger = true;
                 break;
@@ -67,7 +69,8 @@ public class SpawnerComponent : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        m_timeBetweenSpawn -= Time.fixedDeltaTime;
+        if (m_currentActiveAmount < m_maxActiveNumber) 
+            m_timeBetweenSpawn -= Time.fixedDeltaTime;
         if (m_timeBetweenSpawn <= 0.0f && m_currentActiveAmount < m_maxActiveNumber && (m_totalSpawned < m_totalToSpawn || m_totalToSpawn <= 0))
             SpawnEntity();
     }
@@ -96,7 +99,8 @@ public class SpawnerComponent : MonoBehaviour
                     break;
             }
             spawn = Instantiate(m_entitiesToSpawn[m_entityObjectIndex], spawnPos, spawnRot, transform).AddComponent<SpawnedEntity>();
-            spawn.SetSpawnerAndIndex(this, m_totalSpawned);
+            spawn.SetSpawnerAndIndex(this, m_entitiesSpawned.Count);
+            spawn.gameObject.SendMessage("SetGameManager", m_gameManager, SendMessageOptions.DontRequireReceiver);
             m_entitiesSpawned.Add(spawn);
             ++m_locationSpawnIndex;
         }
@@ -126,8 +130,14 @@ public class SpawnerComponent : MonoBehaviour
         m_timeBetweenSpawn = Random.Range(m_minTimeBetweenSpawn, m_maxTimeBetweenSpawn);
     }
 
-    public void EntityDestroyed()
+    public void EntityDestroyed(int index)
     {
+        m_entitiesSpawned.RemoveAt(index);
         --m_currentActiveAmount;
+    }
+
+    public void SetGameManager(GameManager gameManager)
+    {
+        m_gameManager = gameManager;
     }
 }

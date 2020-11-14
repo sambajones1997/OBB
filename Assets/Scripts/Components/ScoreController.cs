@@ -7,14 +7,13 @@ public class ScoreController : MonoBehaviour
 {
     [SerializeField] protected int m_scoreToGive = 100;
     List<ScoreVoxelComponent> m_scoreVoxels;
-    [SerializeField] bool m_activate;
+    [SerializeField] bool m_active;
 
-    public void SetupScoreController()
+    public void SetupScoreController(GameManager gameManager)
     {
         transform.parent = null;
         transform.rotation = Quaternion.Euler(Vector3.zero);
         m_scoreVoxels = new List<ScoreVoxelComponent>(GetComponentsInChildren<ScoreVoxelComponent>(true));
-        PlayerController m_playerController = FindObjectOfType<PlayerController>();
 
         if (m_scoreVoxels.Count > 0)
         {
@@ -24,16 +23,24 @@ public class ScoreController : MonoBehaviour
             foreach (var score in m_scoreVoxels)
             {
                 score.m_score = scorePerVoxel;
-                score.m_playerController = m_playerController;
+                score.m_gameManager = gameManager;
                 score.gameObject.SetActive(true);
             }
             m_scoreVoxels[0].m_score += remaining; // if we have some left over e.g. 100 / 99 would leave 1 remaining in floating so add that to first one
+            m_active = true;
+        }
+        else
+        {
+            // Just remove this component and give player points directly -- more optimised than spawning game objects and adding a score voxel component and besides, they wouldn't have the model and trail
+            gameManager.m_playerController.AddScore(new ScorePackage(m_scoreToGive));
+            Destroy(this); // Just remove this component
         }
     }
 
     private void Update()
     {
-        transform.Rotate(new Vector3(0.0f, 45.0f * Time.fixedDeltaTime, 0.0f));
+        if (m_active)
+            transform.Rotate(new Vector3(0.0f, 45.0f * Time.fixedDeltaTime, 0.0f));
     }
 
 }

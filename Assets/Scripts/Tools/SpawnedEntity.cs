@@ -22,4 +22,9 @@ public class SpawnedEntity : MonoBehaviour
     {
         m_spawner = spawner;
     }
+
+    public void Die()
+    {
+        m_spawner.EntityDestroyed(m_spawnerIndex);
+    }
 }

@@ -5,7 +5,9 @@ using UnityEngine;
 [AddComponentMenu("Managers/GameManager")]
 public class GameManager : MonoBehaviour
 {
-    [HideInInspector] public bool m_isPlayerAlive = false;
+    [SerializeField] protected List<SpawnerComponent> m_spawnerComponents;
+    [HideInInspector] public PlayerController m_playerController { get; private set; }
+    [HideInInspector] public bool m_isPlayerAlive { get; private set; }
 
     public Leaderboard mLeaderBoard;
 
@@ -14,10 +16,25 @@ public class GameManager : MonoBehaviour
         Random.InitState((int)System.DateTime.Now.Ticks);
     }
 
+    public void PlayerHasSpawned(PlayerController playerController)
+    {
+        m_isPlayerAlive = true;
+        m_playerController = playerController;
+    }
+
     public void PlayerHasDied(int mScore)
     {
         mLeaderBoard.gameObject.SetActive(true);
         mLeaderBoard.UpdateList(mScore);
         m_isPlayerAlive = false;
+    }
+
+    public void GameStart()
+    {
+        foreach (var spawner in m_spawnerComponents)
+        {
+            spawner.SetGameManager(this);
+            spawner.enabled = (true);
+        }
     }
 }

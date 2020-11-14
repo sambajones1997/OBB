@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ScoreVoxelComponent : MonoBehaviour
 {
-    [HideInInspector] public PlayerController m_playerController;
+    [HideInInspector] public GameManager m_gameManager;
+    private PlayerController m_playerController;
     [HideInInspector] public int m_score = 25;
     private float m_scoreSpeed = 0.0f;
     private float m_maxScoreSpeed = 100.0f;
@@ -17,6 +18,7 @@ public class ScoreVoxelComponent : MonoBehaviour
     {
         m_scoreSpeed = Random.Range(0.0f, 10.0f);
         m_idleTime = Random.Range(0.0f, 2.5f);
+        m_playerController = m_gameManager.m_playerController;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -29,7 +31,7 @@ public class ScoreVoxelComponent : MonoBehaviour
         }
         else
         {
-            if (!m_playerController.IsAlive())
+            if (!m_gameManager.m_isPlayerAlive)
             {
                 GiveScore();
             }
@@ -40,7 +42,7 @@ public class ScoreVoxelComponent : MonoBehaviour
                 transform.LookAt(m_playerController.transform);
                 transform.Translate(Vector3.forward * m_scoreSpeed * Time.fixedDeltaTime);
 
-                if ((m_playerController.transform.position - transform.position).sqrMagnitude <= 1.0f)
+                if ((m_playerController.transform.position - transform.position).sqrMagnitude <= 50.0f)
                 {
                     if (!m_scoreGiven)
                     {

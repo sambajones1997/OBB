@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 8483367690888203958}
   - component: {fileID: 8482955624040503688}
   - component: {fileID: 8433447617772984350}
-  - component: {fileID: 8482736540513641978}
   - component: {fileID: 5852858415490983995}
   - component: {fileID: 9017469276029909159}
   m_Layer: 13
@@ -225,25 +224,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8482736540513641978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8370705102037293966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d4003ac566585f4bacd9571c6e0eb76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mLootObjects:
-  - m_lootItem: {fileID: 1737052472747284214, guid: 781326bfc46aaa54a8eca520d9f9982d,
-      type: 3}
-    m_lootChance: 0.5
-  - m_lootItem: {fileID: 5066654212743628602, guid: 3cfce4b81b1ce4648a2c414c676cd767,
-      type: 3}
-    m_lootChance: 0.1
 --- !u!114 &5852858415490983995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,11 +238,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_shipRoot: {fileID: 0}
   m_shipBase: {fileID: 0}
-  mLastCauseOfDamage: {fileID: 0}
-  mShipRotationSpeed: 90
-  mEnemyType: 0
+  m_lastCauseOfDamage: {fileID: 0}
+  m_shipRotationSpeed: 90
   mShipShootAngle: 15
-  mPlayerShip: {fileID: 0}
+  m_playerController: {fileID: 0}
   m_maxPlayerReaction: 0.2
   m_maxShipTurnTimer: 0.05
 --- !u!114 &9017469276029909159

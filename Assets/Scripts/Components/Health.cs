@@ -16,10 +16,10 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(DamagePackage damagePackage)
     {
+        SendMessageUpwards("TakenDamage", damagePackage.mDamageDealer, SendMessageOptions.DontRequireReceiver);
         if (mHealth > 0 && (mHealth -= damagePackage.mDamage) <= 0)
         {
             mHealth = 0;
-            if (GetComponentInParent<ShipController>()) GetComponentInParent<ShipController>().mLastCauseOfDamage = damagePackage.mDamageDealer;
             SendMessageUpwards("Die", SendMessageOptions.RequireReceiver);
         }
     }
