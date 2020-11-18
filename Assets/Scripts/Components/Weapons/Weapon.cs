@@ -8,21 +8,25 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected GameObject mWeaponProjectile;
     [SerializeField] protected AudioSource mAudioSource;
     [SerializeField] protected AudioClip mWeaponSound;
+    [SerializeField] protected float mMaxReloadTimer = 1.0f;
+    [SerializeField] protected float mFireRate = 10;
     protected float mFireRateTimer = 0.0f;
     protected float mReloadTimer = 0.0f;
-    int mAmmo = 0;
     [SerializeField] protected bool mUseAmmo = false;
-    [SerializeField] protected int mMaxAmmo = 10;
-    [SerializeField] protected float mFireRate = 10;
     [SerializeField] protected int mWeaponDamage = 10;
-    [SerializeField] protected float mMaxReloadTimer = 1.0f;
+    [SerializeField] protected int m_MaxAmmo = 10;
+    int mAmmo = 0;
+    int m_ammoIndex = 0;
+
+
+    protected List<GameObject> m_projectiles;
 
     protected void Start()
     {
-        mAmmo = mMaxAmmo;
+        mAmmo = m_MaxAmmo;
     }
 
-    public void SetupWeapon()
+    public void SetupWeapon(List<GameObject> projectileLocations)
     {
         if (!mWeaponController)
             mWeaponController = transform.root.GetComponentInChildren<WeaponController>();
@@ -32,6 +36,13 @@ public class Weapon : MonoBehaviour
 
         if (!mWeaponController || !mAudioSource || !mWeaponSound || !mWeaponProjectile)
             Destroy(this);
+
+        for (int i = 0; i < m_MaxAmmo * 2 * (projectileLocations.Count); ++i)
+        {
+            Projectile proj = Instantiate(mWeaponProjectile, Vector3.zero, new Quaternion()).GetComponent<Projectile>();
+            proj.mParentObject = mWeaponController.GetShipController().gameObject;
+            proj.mProjectileDamage = mWeaponDamage;
+        }
     }
 
     protected void FixedUpdate()
@@ -45,7 +56,7 @@ public class Weapon : MonoBehaviour
             mReloadTimer -= Time.fixedDeltaTime;
             if (mReloadTimer <= 0.0f)
             {
-                mAmmo = mMaxAmmo;
+                mAmmo = m_MaxAmmo;
             }
         }
     }
@@ -74,8 +85,6 @@ public class Weapon : MonoBehaviour
 
     protected void FireProjectile(Vector3 spawnPos, Quaternion rotation)
     {
-        Projectile proj = Instantiate(mWeaponProjectile, spawnPos, rotation).GetComponent<Projectile>();
-        proj.mParentObject = mWeaponController.GetShipController().gameObject;
-        proj.mProjectileDamage = mWeaponDamage;
+
     }
 }

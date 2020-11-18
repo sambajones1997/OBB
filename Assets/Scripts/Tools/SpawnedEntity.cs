@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnedEntity : MonoBehaviour
 {
     protected SpawnerComponent m_spawner;
-    protected int m_spawnerIndex = 0;
+    public int m_spawnerIndex = 0;
 
     public void SetSpawnerAndIndex(SpawnerComponent spawner, int spawnIndex)
     {

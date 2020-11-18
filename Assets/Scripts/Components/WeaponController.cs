@@ -32,7 +32,7 @@ public class WeaponController : MonoBehaviour
         mEquippedWeapon = GetComponentInChildren<Weapon>();
         if (mEquippedWeapon)
         {
-            mEquippedWeapon.SetupWeapon();
+            mEquippedWeapon.SetupWeapon(mProjectileLocations);
         }
         OnWeaponControllerStart();
     }

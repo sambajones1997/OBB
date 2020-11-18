@@ -4699,7 +4699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117457330f9b112459c15cac47a7a612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isPlayerAlive: 0
   m_spawnerComponents:
   - {fileID: 1083722395}
   - {fileID: 2072395131}

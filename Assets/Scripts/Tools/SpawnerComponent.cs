@@ -134,6 +134,11 @@ public class SpawnerComponent : MonoBehaviour
     {
         m_entitiesSpawned.RemoveAt(index);
         --m_currentActiveAmount;
+        foreach (SpawnedEntity entity in m_entitiesSpawned)
+        {
+            if (entity.m_spawnerIndex > index) // if our entity was in the next positions after this, it will now be reduced by 1!
+                entity.m_spawnerIndex--;
+        }
     }
 
     public void SetGameManager(GameManager gameManager)

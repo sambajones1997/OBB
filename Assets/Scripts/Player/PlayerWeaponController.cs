@@ -31,7 +31,7 @@ public class PlayerWeaponController : WeaponController
     {
         mEquippedWeapon = newWeapon;
         if (!usingDefaultWeapon)
-            mEquippedWeapon.SetupWeapon();
+            mEquippedWeapon.SetupWeapon(mProjectileLocations);
         mWeaponTimeRemaining = mMaxWeaponTime;
         mUsingDefaultWeapon = usingDefaultWeapon;
     }
