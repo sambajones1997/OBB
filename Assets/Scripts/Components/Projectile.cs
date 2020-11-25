@@ -4,20 +4,28 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public bool bIsRocket = false;
+    public bool m_bIsRocket = false;
+    public bool m_bDestroyOnLifeExpire = false;
     public float mProjectileSpeed = 15.0f;
-    public float mProjectileLifeTime = 5.0f;
+    public float mProjectileMaxLifeTime = 5.0f;
+    float mProjectileLifeTime = 5.0f;
     public int mProjectileDamage = 10;
     public GameObject mParentObject;
 
     private void FixedUpdate()
     {
         mProjectileLifeTime -= Time.fixedDeltaTime;
-        if (mProjectileLifeTime <= 0.0f) Destroy(gameObject);
+        if (mProjectileLifeTime <= 0.0f)
+        {
+            if (m_bDestroyOnLifeExpire)
+                Destroy(gameObject);
+            else
+                ResetProjectile();
+        }
         else
         {
             transform.Translate(Vector3.forward * mProjectileSpeed * Time.fixedDeltaTime);
-            if (bIsRocket) transform.Rotate(new Vector3(0.0f, 0.0f, 45.0f * Time.fixedDeltaTime));
+            if (m_bIsRocket) transform.Rotate(new Vector3(0.0f, 0.0f, 45.0f * Time.fixedDeltaTime));
         }
     }
 
@@ -33,12 +41,25 @@ public class Projectile : MonoBehaviour
             }
             DamagePackage damagePackage = new DamagePackage(mProjectileDamage, mParentObject);
             collider.transform.gameObject.SendMessage("TakeDamage", damagePackage,SendMessageOptions.DontRequireReceiver);
-            Destroy(gameObject);
+            ResetProjectile();
         }
     }
 
     public void TakeDamage(DamagePackage damagePackage)
     {
-        Destroy(gameObject);
+        ResetProjectile();
+    }
+
+    public void ResetProjectile()
+    {
+        mProjectileLifeTime = mProjectileMaxLifeTime;
+        gameObject.SetActive(false);
+    }
+
+    public void ShootProjectile(Vector3 pos, Quaternion rot)
+    {
+        transform.position = pos;
+        transform.rotation = rot;
+        gameObject.SetActive(true);
     }
 }

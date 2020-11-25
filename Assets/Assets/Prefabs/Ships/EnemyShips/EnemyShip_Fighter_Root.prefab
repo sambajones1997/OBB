@@ -6115,6 +6115,12 @@ PrefabInstance:
       propertyPath: mMaxAmmo
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7473042711341299100, guid: 53a7984f6aad9e042b8157a9f604b6c8,
+        type: 3}
+      propertyPath: mWeaponProjectile
+      value: 
+      objectReference: {fileID: 1584495645493048, guid: cc907c590d1d53b44b3f42a785dcfba5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53a7984f6aad9e042b8157a9f604b6c8, type: 3}
 --- !u!4 &5584676732771907671 stripped

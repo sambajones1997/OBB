@@ -16,10 +16,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected int mWeaponDamage = 10;
     [SerializeField] protected int m_MaxAmmo = 10;
     int mAmmo = 0;
-    int m_ammoIndex = 0;
-
-
-    protected List<GameObject> m_projectiles;
 
     protected void Start()
     {
@@ -37,12 +33,17 @@ public class Weapon : MonoBehaviour
         if (!mWeaponController || !mAudioSource || !mWeaponSound || !mWeaponProjectile)
             Destroy(this);
 
+         List<Projectile> projectiles = new List<Projectile>();
+
         for (int i = 0; i < m_MaxAmmo * 2 * (projectileLocations.Count); ++i)
         {
             Projectile proj = Instantiate(mWeaponProjectile, Vector3.zero, new Quaternion()).GetComponent<Projectile>();
             proj.mParentObject = mWeaponController.GetShipController().gameObject;
             proj.mProjectileDamage = mWeaponDamage;
+            proj.ResetProjectile();
+            projectiles.Add(proj);
         }
+        mWeaponController.mProjectiles = projectiles;
     }
 
     protected void FixedUpdate()
@@ -85,6 +86,9 @@ public class Weapon : MonoBehaviour
 
     protected void FireProjectile(Vector3 spawnPos, Quaternion rotation)
     {
-
+        mWeaponController.mProjectiles[mWeaponController.m_ammoIndex].ShootProjectile(spawnPos, rotation);
+        ++mWeaponController.m_ammoIndex;
+        if (mWeaponController.m_ammoIndex >= mWeaponController.mProjectiles.Count)
+            mWeaponController.m_ammoIndex = 0;
     }
 }

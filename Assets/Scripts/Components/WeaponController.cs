@@ -9,6 +9,8 @@ public class WeaponController : MonoBehaviour
     [SerializeField] protected Weapon mEquippedWeapon;
     [SerializeField] protected ShipController mShipController;
     [SerializeField] protected List<GameObject> mProjectileLocations;
+    [SerializeField] public List<Projectile> mProjectiles = new List<Projectile>();
+    public int m_ammoIndex = 0;
     public void FireWeapon()
     {
         if (mEquippedWeapon && mProjectileLocations.Count > 0)
@@ -44,5 +46,17 @@ public class WeaponController : MonoBehaviour
     public ShipController GetShipController()
     {
         return mShipController;
+    }
+
+
+    // mostly to be used by player to swap weapons
+    public void ResetWeaponController()
+    {
+        foreach (Projectile p in mProjectiles)
+        {
+            p.m_bDestroyOnLifeExpire = true; // all projectiles will destroy themselves on lifetime expiration
+        }
+        mProjectiles.Clear(); // clear this list
+        Start(); // Restart this component
     }
 }
