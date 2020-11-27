@@ -19,7 +19,6 @@ public class Weapon : MonoBehaviour
 
     protected void Start()
     {
-        mAmmo = m_MaxAmmo;
     }
 
     public void SetupWeapon(List<GameObject> projectileLocations)
@@ -33,17 +32,7 @@ public class Weapon : MonoBehaviour
         if (!mWeaponController || !mAudioSource || !mWeaponSound || !mWeaponProjectile)
             Destroy(this);
 
-         List<Projectile> projectiles = new List<Projectile>();
-
-        for (int i = 0; i < m_MaxAmmo * 2 * (projectileLocations.Count); ++i)
-        {
-            Projectile proj = Instantiate(mWeaponProjectile, Vector3.zero, new Quaternion()).GetComponent<Projectile>();
-            proj.mParentObject = mWeaponController.GetShipController().gameObject;
-            proj.mProjectileDamage = mWeaponDamage;
-            proj.ResetProjectile();
-            projectiles.Add(proj);
-        }
-        mWeaponController.mProjectiles = projectiles;
+        StartCoroutine(SpawnProjectiles(projectileLocations));
     }
 
     protected void FixedUpdate()
@@ -90,5 +79,21 @@ public class Weapon : MonoBehaviour
         ++mWeaponController.m_ammoIndex;
         if (mWeaponController.m_ammoIndex >= mWeaponController.mProjectiles.Count)
             mWeaponController.m_ammoIndex = 0;
+    }
+
+    IEnumerator SpawnProjectiles(List<GameObject> projectileLocations)
+    {
+        List<Projectile> projectiles = new List<Projectile>();
+        for (int i = 0; i < m_MaxAmmo * 2 * (projectileLocations.Count); ++i)
+        {
+            Projectile proj = Instantiate(mWeaponProjectile, Vector3.zero, new Quaternion()).GetComponent<Projectile>();
+            proj.mParentObject = mWeaponController.GetShipController().gameObject;
+            proj.mProjectileDamage = mWeaponDamage;
+            proj.ResetProjectile();
+            projectiles.Add(proj);
+            ++mAmmo; // we can increase the amount of ammo we have available with each spawn so no invalid firing will be done without and extra logic check
+        }
+        mWeaponController.mProjectiles = projectiles;
+        yield return null;
     }
 }

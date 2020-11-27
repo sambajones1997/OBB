@@ -11,6 +11,7 @@ public class ScoreVoxelComponent : MonoBehaviour
     private float m_maxScoreSpeed = 100.0f;
     private float m_maxAcceleration = 25.0f;
     private float m_idleTime = 0.0f;
+    private float m_lifeTime = 10.0f;
     private bool m_scoreGiven = false;
 
     // Start is called before the first frame update
@@ -31,7 +32,8 @@ public class ScoreVoxelComponent : MonoBehaviour
         }
         else
         {
-            if (!m_gameManager.m_isPlayerAlive)
+            m_lifeTime -= Time.fixedDeltaTime; // give score after certain amount of time -- reduce active number of objects and clutter on screen
+            if (!m_gameManager.m_isPlayerAlive || m_lifeTime <= 0.0f)
             {
                 GiveScore();
             }

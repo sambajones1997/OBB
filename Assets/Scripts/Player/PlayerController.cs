@@ -10,6 +10,7 @@ public class PlayerController : ShipController
     public GameUI mGameUI;
     [SerializeField] protected GameObject m_directionArrow;
     [SerializeField] protected float mKillStreakTimeOut = 5.0f;
+    [SerializeField] protected float m_shipSpeed = 10.0f;
     protected float m_KillStreakTimer = 0.0f;
     protected float m_TimeSinceLastKill = 0.0f;
     protected int mScore = 0;
@@ -77,16 +78,15 @@ public class PlayerController : ShipController
     void GameInput()
     {
         Vector3 moveVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
-        moveVector.Normalize();
         if (moveVector.sqrMagnitude > 0.0f)
         {
-            m_movementVector = moveVector;
+            m_movementVector = moveVector.normalized;
             m_directionArrow.transform.rotation = Quaternion.Euler(0.0f, Vector3.SignedAngle(Vector3.forward, m_movementVector, Vector3.up), 0.0f);
         }
-        m_momentumMovement.AddInput(m_movementVector);
+        m_rigidBody.MovePosition(m_rigidBody.position + (m_movementVector * m_shipSpeed * Time.fixedDeltaTime)); // move in last direction
 
 
-         Vector3 shootVector = new Vector3(Input.GetAxisRaw("ShootHorizontal"), 0.0f, Input.GetAxisRaw("ShootVertical"));
+        Vector3 shootVector = new Vector3(Input.GetAxisRaw("ShootHorizontal"), 0.0f, Input.GetAxisRaw("ShootVertical"));
         if (shootVector.sqrMagnitude > 0.0f)
         {
             m_shipBase.transform.localRotation = Quaternion.Euler(0.0f, Vector3.SignedAngle(Vector3.forward, shootVector, Vector3.up), 0.0f);
