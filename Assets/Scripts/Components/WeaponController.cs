@@ -11,6 +11,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] protected List<GameObject> mProjectileLocations;
     [SerializeField] public List<Projectile> mProjectiles = new List<Projectile>();
     public int m_ammoIndex = 0;
+
     public void FireWeapon()
     {
         if (mEquippedWeapon && mProjectileLocations.Count > 0)
@@ -38,6 +39,7 @@ public class WeaponController : MonoBehaviour
         }
         OnWeaponControllerStart();
     }
+
     protected virtual void OnWeaponControllerStart()
     {
 
@@ -58,5 +60,13 @@ public class WeaponController : MonoBehaviour
         }
         mProjectiles.Clear(); // clear this list
         Start(); // Restart this component
+    }
+
+    public void ReleaseProjectileToPool(Projectile projectile)
+    {
+        if (projectile)
+        {
+            mProjectiles.Add(projectile);
+        }
     }
 }

@@ -12,6 +12,15 @@ public class Projectile : MonoBehaviour
     public int mProjectileDamage = 10;
     public GameObject mParentObject;
 
+    PoolSystem mPool;
+
+    private void Start()
+    {
+        string poolName = gameObject.transform.root.name;
+        poolName.re
+        mPool = ObjectPoolingSystem.FindCreatePool(poolName);
+    }
+
     private void FixedUpdate()
     {
         mProjectileLifeTime -= Time.fixedDeltaTime;
@@ -20,7 +29,7 @@ public class Projectile : MonoBehaviour
             if (m_bDestroyOnLifeExpire)
                 Destroy(gameObject);
             else
-                ResetProjectile();
+                ReleaseProjectileToPool();
         }
         else
         {
@@ -41,13 +50,13 @@ public class Projectile : MonoBehaviour
             }
             DamagePackage damagePackage = new DamagePackage(mProjectileDamage, mParentObject);
             collider.transform.gameObject.SendMessage("TakeDamage", damagePackage,SendMessageOptions.DontRequireReceiver);
-            ResetProjectile();
+            ReleaseProjectileToPool();
         }
     }
 
     public void TakeDamage(DamagePackage damagePackage)
     {
-        ResetProjectile();
+        ReleaseProjectileToPool();
     }
 
     public void ResetProjectile()
@@ -61,5 +70,18 @@ public class Projectile : MonoBehaviour
         transform.position = pos;
         transform.rotation = rot;
         gameObject.SetActive(true);
+    }
+
+    public void ReleaseProjectileToPool()
+    {
+        ResetProjectile();
+        if (mParentObject != null)
+        { 
+            mParentObject.GetComponent<WeaponController>().ReleaseProjectileToPool(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

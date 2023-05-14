@@ -37,7 +37,7 @@ public class PlayerController : ShipController
         mGameUI.UpdateHealth(m_healthComponent.mHealth, m_healthComponent.mMaxHealth);
         mGameUI.UpdateScore(mScore);
 
-        m_movementVector = Vector3.forward;
+        m_movementVector = Vector3.zero;
         m_gameManager.PlayerHasSpawned(this);
     }
     // Update is called once per frame
@@ -77,6 +77,7 @@ public class PlayerController : ShipController
 
     void GameInput()
     {
+ 
         Vector3 moveVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
         if (moveVector.sqrMagnitude > 0.0f)
         {
@@ -95,9 +96,7 @@ public class PlayerController : ShipController
         else
         {
             m_shipBase.transform.localRotation = m_directionArrow.transform.rotation; // Face the way the ship is moving
-
         }
-
     }
 
     public void AddScore(ScorePackage scorePackage)

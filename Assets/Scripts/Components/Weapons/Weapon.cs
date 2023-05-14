@@ -17,10 +17,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected int m_MaxAmmo = 10;
     int mAmmo = 0;
 
-    protected void Start()
-    {
-    }
-
+    PoolSystem ProjectilePool;
     public void SetupWeapon(List<GameObject> projectileLocations)
     {
         if (!mWeaponController)
@@ -32,7 +29,7 @@ public class Weapon : MonoBehaviour
         if (!mWeaponController || !mAudioSource || !mWeaponSound || !mWeaponProjectile)
             Destroy(this);
 
-        StartCoroutine(SpawnProjectiles(projectileLocations));
+        ProjectilePool = ObjectPoolingSystem.FindCreatePool(mWeaponProjectile.name);
     }
 
     protected void FixedUpdate()
@@ -75,10 +72,28 @@ public class Weapon : MonoBehaviour
 
     protected void FireProjectile(Vector3 spawnPos, Quaternion rotation)
     {
-        mWeaponController.mProjectiles[mWeaponController.m_ammoIndex].ShootProjectile(spawnPos, rotation);
+        RequestProjectile().ShootProjectile(spawnPos, rotation);
         ++mWeaponController.m_ammoIndex;
         if (mWeaponController.m_ammoIndex >= mWeaponController.mProjectiles.Count)
             mWeaponController.m_ammoIndex = 0;
+    }
+
+    protected Projectile RequestProjectile()
+    {
+        if (mWeaponController && ProjectilePool.PoolObjects.Count > 0)
+        {
+            Projectile projectile = (Projectile)(ProjectilePool.PoolObjects[0]);
+            ProjectilePool.PoolObjects.RemoveAt(0);
+            return projectile;
+        }
+
+        Projectile proj = Instantiate(mWeaponProjectile, Vector3.zero, new Quaternion()).GetComponent<Projectile>();
+        proj.mParentObject = mWeaponController.GetShipController().gameObject;
+        proj.mProjectileDamage = mWeaponDamage;
+        proj.ResetProjectile();
+        ++mAmmo;
+
+        return proj;
     }
 
     IEnumerator SpawnProjectiles(List<GameObject> projectileLocations)
