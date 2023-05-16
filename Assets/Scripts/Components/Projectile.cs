@@ -12,12 +12,13 @@ public class Projectile : MonoBehaviour
     public int mProjectileDamage = 10;
     public GameObject mParentObject;
 
+    public string mName = "";
+
     PoolSystem mPool;
 
     private void Start()
     {
-        string poolName = gameObject.transform.root.name;
-        poolName.re
+        string poolName = mName + "_Pool";
         mPool = ObjectPoolingSystem.FindCreatePool(poolName);
     }
 
