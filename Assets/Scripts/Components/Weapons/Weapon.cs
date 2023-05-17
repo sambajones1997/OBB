@@ -16,8 +16,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected int mWeaponDamage = 10;
     [SerializeField] protected int m_MaxAmmo = 10;
     int mAmmo = 0;
+    bool bSetup = false;
 
     PoolSystem ProjectilePool;
+    Projectile projectileComp;
+
     public void SetupWeapon(List<GameObject> projectileLocations)
     {
         if (!mWeaponController)
@@ -29,11 +32,22 @@ public class Weapon : MonoBehaviour
         if (!mWeaponController || !mAudioSource || !mWeaponSound || !mWeaponProjectile)
             Destroy(this);
 
-        ProjectilePool = ObjectPoolingSystem.FindCreatePool(mWeaponProjectile.name);
+        projectileComp = mWeaponProjectile.GetComponent<Projectile>();
+        if (projectileComp != null)
+        {
+            ProjectilePool = ObjectPoolingSystem.FindCreatePool(ObjectPoolingSystem.GetPoolName(projectileComp.mName));
+        }
+
+        bSetup = true;
     }
 
     protected void FixedUpdate()
     {
+        if (!bSetup)
+        {
+            return;
+        }
+
         if (mFireRateTimer > 0.0f && mAmmo > 0)
         {
             mFireRateTimer -= Time.fixedDeltaTime;
@@ -50,7 +64,7 @@ public class Weapon : MonoBehaviour
 
     public void Fire(List<GameObject> projectileLocations)
     {
-        if (mFireRateTimer <= 0.0f)
+        if (mFireRateTimer <= 0.0f && bSetup)
         {
             mAudioSource.Play();
             mFireRateTimer = 1.0f / mFireRate;
@@ -67,33 +81,52 @@ public class Weapon : MonoBehaviour
     protected virtual void FireWeapon(List<GameObject> projectileLocations) 
     {
         foreach (GameObject go in projectileLocations)
-            FireProjectile(go.transform.position, go.transform.rotation);
+        {
+            if (go != null && go.transform != null)
+            {
+                FireProjectile(go.transform.position, go.transform.rotation);
+            }
+        }
     }
 
     protected void FireProjectile(Vector3 spawnPos, Quaternion rotation)
     {
-        RequestProjectile().ShootProjectile(spawnPos, rotation);
-        ++mWeaponController.m_ammoIndex;
-        if (mWeaponController.m_ammoIndex >= mWeaponController.mProjectiles.Count)
-            mWeaponController.m_ammoIndex = 0;
+        Projectile projectile = RequestProjectile();
+        if (projectile != null)
+        {
+            projectile.ShootProjectile(spawnPos, rotation);
+            ++mWeaponController.m_ammoIndex;
+            if (mWeaponController.m_ammoIndex >= mWeaponController.mProjectiles.Count)
+                mWeaponController.m_ammoIndex = 0;
+        }
     }
 
     protected Projectile RequestProjectile()
     {
-        if (mWeaponController && ProjectilePool.PoolObjects.Count > 0)
+        Projectile projectile = null;
+        if (mWeaponController && ProjectilePool != null)
         {
-            Projectile projectile = (Projectile)(ProjectilePool.PoolObjects[0]);
-            ProjectilePool.PoolObjects.RemoveAt(0);
-            return projectile;
+            projectile = ObjectPoolingSystem.GetObjectFromPool<Projectile>(ProjectilePool);
+            if (projectile != null)
+            {
+                Debug.Log("Grabbed Projectile From Pool: " + ProjectilePool.Name);
+                return projectile;
+            }
         }
 
-        Projectile proj = Instantiate(mWeaponProjectile, Vector3.zero, new Quaternion()).GetComponent<Projectile>();
-        proj.mParentObject = mWeaponController.GetShipController().gameObject;
-        proj.mProjectileDamage = mWeaponDamage;
-        proj.ResetProjectile();
+        string projectileName = "";
+        if (projectileComp != null)
+        {
+            projectileName = projectileComp.mName;
+        }
+        Debug.Log("Created Projectile: " + ObjectPoolingSystem.GetPoolName(projectileName));
+        projectile = Instantiate(mWeaponProjectile, Vector3.zero, new Quaternion()).GetComponent<Projectile>();
+        projectile.mParentObject = mWeaponController.GetShipController().gameObject;
+        projectile.mProjectileDamage = mWeaponDamage;
+        projectile.ResetProjectile();
         ++mAmmo;
 
-        return proj;
+        return projectile;
     }
 
     IEnumerator SpawnProjectiles(List<GameObject> projectileLocations)

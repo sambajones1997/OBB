@@ -14,6 +14,7 @@ public static class ObjectPoolingSystem
 
     static List<PoolSystem> Pools = new List<PoolSystem>();
 
+
     public static bool FindPoolSystem(string poolName, out PoolSystem poolSystem)
     {
         foreach (PoolSystem pool in Pools)
@@ -40,5 +41,48 @@ public static class ObjectPoolingSystem
         poolSystem.Name = poolName;
         Pools.Add(poolSystem);
         return Pools[Pools.Count - 1];
+    }
+
+    public static GameObject GetGameObjectFromPool(PoolSystem poolHandle, bool bRemoveObjectFromPool = true)
+    {
+        if (poolHandle.Name.Length > 0 && poolHandle.PoolObjects.Count > 0)
+        {
+            GameObject obj = poolHandle.PoolObjects[0].gameObject;
+            if (bRemoveObjectFromPool)
+            {
+                poolHandle.PoolObjects.RemoveAt(0);
+            }
+            return obj;
+        }
+        return null;
+    }
+
+    public static T GetObjectFromPool<T>(PoolSystem poolHandle, bool bRemoveObjectFromPool = true)
+    {
+        if (poolHandle.Name.Length > 0 && poolHandle.PoolObjects.Count > 0)
+        {
+            T comp = poolHandle.PoolObjects[0].gameObject.GetComponent<T>();
+            if (comp != null && bRemoveObjectFromPool)
+            {
+                poolHandle.PoolObjects.RemoveAt(0);
+            }
+            return comp;
+        }
+        return default(T);
+    }
+
+    public static string GetPoolName(string objectName)
+    {
+        return objectName + "_Pool";
+    }
+
+    public static void FlushPools()
+    {
+        foreach(PoolSystem pool in Pools)
+        {
+            pool.PoolObjects.Clear();
+        }
+
+        Pools.Clear();
     }
 }

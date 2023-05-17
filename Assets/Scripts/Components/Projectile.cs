@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject != mParentObject)
+        if (collider.gameObject != null && collider.gameObject != mParentObject)
         {
             if (collider.gameObject.layer == 10)
             {
@@ -50,7 +50,10 @@ public class Projectile : MonoBehaviour
                     return;
             }
             DamagePackage damagePackage = new DamagePackage(mProjectileDamage, mParentObject);
-            collider.transform.gameObject.SendMessage("TakeDamage", damagePackage,SendMessageOptions.DontRequireReceiver);
+            if (collider.transform.gameObject != null)
+            {
+                collider.transform.gameObject.SendMessage("TakeDamage", damagePackage, SendMessageOptions.DontRequireReceiver);
+            }
             ReleaseProjectileToPool();
         }
     }
@@ -76,9 +79,10 @@ public class Projectile : MonoBehaviour
     public void ReleaseProjectileToPool()
     {
         ResetProjectile();
-        if (mParentObject != null)
-        { 
-            mParentObject.GetComponent<WeaponController>().ReleaseProjectileToPool(this);
+        if (mPool != null)
+        {
+            mPool.PoolObjects.Add(this);
+            gameObject.SetActive(false);
         }
         else
         {

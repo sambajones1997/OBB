@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4404329667335700}
   - {fileID: 1921626705146997907}
@@ -47,11 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d416e7644d3374caf9c9c247cb1a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bIsRocket: 0
+  m_bIsRocket: 0
+  m_bDestroyOnLifeExpire: 0
   mProjectileSpeed: 100
-  mProjectileLifeTime: 10
+  mProjectileMaxLifeTime: 5
   mProjectileDamage: 10
   mParentObject: {fileID: 0}
+  mName: PlayerProjectile
 --- !u!65 &65946316387894486
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109,6 +112,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4898463587430142}
   m_RootOrder: 0
@@ -132,6 +136,7 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -189,6 +194,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4898463587430142}
   m_RootOrder: 1
@@ -205,6 +211,7 @@ TrailRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0

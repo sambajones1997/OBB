@@ -61,12 +61,4 @@ public class WeaponController : MonoBehaviour
         mProjectiles.Clear(); // clear this list
         Start(); // Restart this component
     }
-
-    public void ReleaseProjectileToPool(Projectile projectile)
-    {
-        if (projectile)
-        {
-            mProjectiles.Add(projectile);
-        }
-    }
 }

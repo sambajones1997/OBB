@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Random.InitState((int)System.DateTime.Now.Ticks);
+        ObjectPoolingSystem.FlushPools();
     }
 
     public void PlayerHasSpawned(PlayerController playerController)
