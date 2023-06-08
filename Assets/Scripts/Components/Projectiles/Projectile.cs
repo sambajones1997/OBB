@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public bool m_bIsRocket = false;
     public bool m_bDestroyOnLifeExpire = false;
     public float mProjectileSpeed = 15.0f;
     public float mProjectileMaxLifeTime = 5.0f;
@@ -34,26 +33,38 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            transform.Translate(Vector3.forward * mProjectileSpeed * Time.fixedDeltaTime);
-            if (m_bIsRocket) transform.Rotate(new Vector3(0.0f, 0.0f, 45.0f * Time.fixedDeltaTime));
+            MoveProjectile();
         }
     }
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject != null && collider.gameObject != mParentObject)
+        GameObject collidingObject = collider.gameObject;
+        if (collidingObject == null)
         {
-            if (collider.gameObject.layer == 10)
+            return;
+        }
+
+        if (collidingObject.tag != "Player")
+        {
+            int hello = 3;
+        }
+
+        if (collidingObject != mParentObject)
+        {
+            if (collidingObject.layer == 10)
             {
-                Projectile proj = GetComponentInChildren<Projectile>(collider.gameObject.transform.root);
+                Projectile proj = GetComponentInChildren<Projectile>(collidingObject.transform.root);
                 if (proj && proj.mParentObject == mParentObject)
                     return;
             }
+
             DamagePackage damagePackage = new DamagePackage(mProjectileDamage, mParentObject);
-            if (collider.transform.gameObject != null)
+            Health HealthComponent = collidingObject.GetComponentInChildren<Health>();
+            if (HealthComponent != null && !HealthComponent.IsDying())
             {
-                collider.transform.gameObject.SendMessage("TakeDamage", damagePackage, SendMessageOptions.DontRequireReceiver);
-            }
+                collidingObject.SendMessage("TakeDamage", damagePackage, SendMessageOptions.DontRequireReceiver);
+            }      
             ReleaseProjectileToPool();
         }
     }
@@ -66,11 +77,11 @@ public class Projectile : MonoBehaviour
     public void ResetProjectile()
     {
         mProjectileLifeTime = mProjectileMaxLifeTime;
-        gameObject.SetActive(false);
     }
 
     public void ShootProjectile(Vector3 pos, Quaternion rot)
     {
+        ResetProjectile();
         transform.position = pos;
         transform.rotation = rot;
         gameObject.SetActive(true);
@@ -88,5 +99,10 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    protected virtual void MoveProjectile()
+    {
+        transform.Translate(Vector3.forward * mProjectileSpeed * Time.fixedDeltaTime);
     }
 }

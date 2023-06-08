@@ -29,4 +29,9 @@ public class Health : MonoBehaviour
         mHealth += health;
         if (mHealth > mMaxHealth) mHealth = mMaxHealth;
     }
+
+    public bool IsDying()
+    {
+        return mHealth <= 0;
+    }
 }

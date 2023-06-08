@@ -341,9 +341,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4856646142959308}
-  - component: {fileID: 114181520840402056}
   - component: {fileID: 65269211495809074}
   - component: {fileID: 54115029255208590}
+  - component: {fileID: -8328274197971023526}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -377,25 +377,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114181520840402056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1734542271300510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85d416e7644d3374caf9c9c247cb1a20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_bIsRocket: 0
-  m_bDestroyOnLifeExpire: 0
-  mProjectileSpeed: 40
-  mProjectileMaxLifeTime: 5
-  mProjectileDamage: 50
-  mParentObject: {fileID: 0}
-  mName: RocketProjectile
 --- !u!65 &65269211495809074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -425,6 +406,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-8328274197971023526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734542271300510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3779ebb427e49554ea4ec4a966016e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bDestroyOnLifeExpire: 0
+  mProjectileSpeed: 40
+  mProjectileMaxLifeTime: 5
+  mProjectileDamage: 50
+  mParentObject: {fileID: 0}
+  mName: EnemyRocketProjectile
 --- !u!1 &1790569006268802
 GameObject:
   m_ObjectHideFlags: 0

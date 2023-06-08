@@ -123,7 +123,6 @@ public class Weapon : MonoBehaviour
         projectile = Instantiate(mWeaponProjectile, Vector3.zero, new Quaternion()).GetComponent<Projectile>();
         projectile.mParentObject = mWeaponController.GetShipController().gameObject;
         projectile.mProjectileDamage = mWeaponDamage;
-        projectile.ResetProjectile();
         ++mAmmo;
 
         return projectile;
