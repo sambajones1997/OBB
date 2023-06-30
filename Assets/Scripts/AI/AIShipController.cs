@@ -75,10 +75,9 @@ public class AIShipController : ShipController
     protected override void OnShipDie()
     {
         base.OnShipDie();
-        if (m_lastCauseOfDamage.transform.root == m_playerController.transform.root)
+        if (m_lastCauseOfDamage && (m_lastCauseOfDamage.transform.root == m_playerController.transform.root))
         {
             BroadcastMessage("SetupScoreController", m_gameManager, SendMessageOptions.DontRequireReceiver);
         }
-        Destroy(gameObject, 1.0f);
     }
 }

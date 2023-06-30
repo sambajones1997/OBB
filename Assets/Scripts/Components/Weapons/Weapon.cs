@@ -110,6 +110,7 @@ public class Weapon : MonoBehaviour
             if (projectile != null)
             {
                 Debug.Log("Grabbed Projectile From Pool: " + ProjectilePool.Name);
+                projectile.mParentObject = mWeaponController.GetShipController().gameObject;
                 return projectile;
             }
         }

@@ -20,6 +20,7 @@ public class ShipController : MonoBehaviour
     protected GameManager m_gameManager;
 
     protected bool m_isAlive = true;
+    protected bool m_bDestroyOnDeath = false;
     [SerializeField] protected float m_shipRotationSpeed = 90.0f;
     void Start()
     {
@@ -53,16 +54,21 @@ public class ShipController : MonoBehaviour
         // Destroying a component is not done on the same-frame. 
         // 3. We'll be destroying the game object soon anyway so might as well skip the whole de-activation thing.
         GetComponent<Collider>().enabled = false;
-        foreach (var v in GetComponentsInChildren<Renderer>())
+        foreach (var renderer in GetComponentsInChildren<Renderer>())
         {
-            v.enabled = false;
+            renderer.enabled = false;
         }
-        foreach (var t in GetComponentsInChildren<Thruster>())
+        foreach (var thruster in GetComponentsInChildren<Thruster>())
         {
-            t.enabled = false;
+            thruster.enabled = false;
         }
+
         m_isAlive = false;
-        //enabled = false;
+
+        if (m_bDestroyOnDeath)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected virtual void OnShipStart() { }

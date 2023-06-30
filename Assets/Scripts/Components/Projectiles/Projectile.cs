@@ -45,11 +45,6 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        if (collidingObject.tag != "Player")
-        {
-            int hello = 3;
-        }
-
         if (collidingObject != mParentObject)
         {
             if (collidingObject.layer == 10)
@@ -60,6 +55,10 @@ public class Projectile : MonoBehaviour
             }
 
             DamagePackage damagePackage = new DamagePackage(mProjectileDamage, mParentObject);
+            if (mParentObject == null)
+            {
+                Debug.Log("Oh no, my parent is null!");
+            }
             Health HealthComponent = collidingObject.GetComponentInChildren<Health>();
             if (HealthComponent != null && !HealthComponent.IsDying())
             {
